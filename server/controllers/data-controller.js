@@ -23,6 +23,7 @@ module.exports =  {
 
         res.status(200).send(profile)
     },
+    getCategoryUrls: (req, res) => {},
     postArticles: (req, res) => {},
     getArticles: (req, res) => {},
     getArticlesByUser: (req, res) => {},

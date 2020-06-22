@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const pgp = require('pg-promise')();
 const massive = require('massive');
 const authCrtl = require('./controllers/auth-controller')
 const dataCtrl = require('./controllers/data-controller')
@@ -34,3 +33,4 @@ massive({
 
 app.get('/api/categories/:table_name', dataCtrl.getCategories)
 app.post('/api/categories/', dataCtrl.postCategoriesByUser)
+app.get('/api/categories', dataCtrl.getCategoryUrls)

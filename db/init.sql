@@ -65,10 +65,11 @@ CREATE TABLE users (
 
 insert into cat_travel
 values
-(1, 'https://www.lonelyplanet.com/'),
-(2, 'https://www.cntraveler.com/'),
+(1, 'https://www.travelandleisure.com/travel-news'),
+(2, 'https://www.lonelyplanet.com/news'),
 (3, 'https://suitcasemag.com/'),
-(4, 'https://www.nationalgeographic.com/travel/');
+(4, 'https://www.nationalgeographic.com/travel/'),
+(5, 'https://www.afar.com/tips-and-news');
 
 insert into cat_movies
 values
