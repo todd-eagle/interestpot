@@ -22,17 +22,82 @@ CREATE TABLE users (
   sub_category VARCHAR(100)
   );
 
-  CREATE TABLE travel (
+  CREATE TABLE cat_travel (
   id SERIAL PRIMARY KEY,
 	url TEXT
   );
 
-  CREATE TABLE gaming (
+  CREATE TABLE cat_gaming (
   id SERIAL PRIMARY KEY,
 	url TEXT
   );
  
- CREATE TABLE food (
+ CREATE TABLE cat_food (
   id SERIAL PRIMARY KEY,
 	url TEXT
   );
+
+  CREATE TABLE cat_sports (
+  id SERIAL PRIMARY KEY,
+	url TEXT
+  );
+
+ CREATE TABLE cat_movies (
+  id SERIAL PRIMARY KEY,
+	url TEXT
+  );
+
+ CREATE TABLE cat_health (
+  id SERIAL PRIMARY KEY,
+	url TEXT
+  );
+
+  CREATE TABLE cat_dyi (
+  id SERIAL PRIMARY KEY,
+	url TEXT
+  );
+
+   CREATE TABLE cat_photography (
+  id SERIAL PRIMARY KEY,
+	url TEXT
+  );
+
+
+insert into cat_travel
+values
+(1, 'https://www.lonelyplanet.com/'),
+(2, 'https://www.cntraveler.com/'),
+(3, 'https://suitcasemag.com/'),
+(4, 'https://www.nationalgeographic.com/travel/');
+
+insert into cat_movies
+values
+(1, 'https://screenrant.com/movie-news/'),
+(2, 'https://www.empireonline.com/movies/news/'),
+(3, 'https://collider.com/'),
+(4, 'https://www.cinemablend.com/');
+
+
+insert into cat_food
+values
+(1, 'https://www.epicurious.com/'),
+(2, 'https://www.chowhound.com/'),
+(3, 'https://www.thekitchn.com/'),
+(4, 'https://www.vice.com/en_us/topic/food'),
+(5, 'https://www.eater.com/');
+
+insert into cat_health
+values
+(1, 'https://www.healthline.com/'),
+(2, 'https://www.wellandgood.com/'),
+(3, 'https://www.livestrong.com/'),
+(4, 'https://www.acefitness.org/education-and-resources/lifestyle/blog/'),
+(5, 'https://www.health.com/');
+
+insert into cat_gaming
+values
+(1, 'https://www.destructoid.com/'),
+(2, 'https://www.gamesradar.com/'),
+(3, 'https://www.gameinformer.com'),
+(4, 'https://www.gamespot.com/'),
+(5, 'https://www.polygon.com/');

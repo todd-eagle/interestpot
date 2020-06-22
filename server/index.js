@@ -1,8 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const pgp = require('pg-promise')();
 const massive = require('massive');
 const authCrtl = require('./controllers/auth-controller')
+const dataCtrl = require('./controllers/data-controller')
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
@@ -29,3 +31,6 @@ massive({
     console.log('Connected to db')
     app.listen( SERVER_PORT, () => console.log(`Connected to port ${SERVER_PORT}`))
 }).catch(err=>console.log(err))
+
+app.get('/api/categories/:table_name', dataCtrl.getCategories)
+app.post('/api/categories/', dataCtrl.postCategoriesByUser)
