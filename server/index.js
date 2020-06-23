@@ -4,7 +4,7 @@ const session = require('express-session');
 const massive = require('massive');
 const authCrtl = require('./controllers/auth-controller')
 const dataCtrl = require('./controllers/data-controller')
-const scraper = require('./controllers/scraper-controller')
+const scraper = require('./scrapers/scraper-controller')
 const cors = require('cors')
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
