@@ -2,18 +2,33 @@ import axios from 'axios'
 import cheerio from 'cheerio'
 
 const TravelScraper = async () => {
-    const html = await axios.get('https://www.travelandleisure.com/travel-news')
-    const $ = cheerio.load(html.data)
+  // const html = await axios.get('https://www.lonelyplanet.com/news')
+   //const html = await axios.get('http://www.afar.com/')
+   // const $ = cheerio.load(html.data)
+  // const $ = cheerio.load(html.data)
     // let data =[]
 
-//    console.log($('article > figure').find('.relative block cursor-pointer').attr('href')  );
-   
-   //Title
-   console.log($('.LatestArticles').find('a > h2').html() );
-   //Image
-   console.log($('.LatestArticles').find('img').attr('src') );
-   //Link
-   console.log($('.LatestArticles').find('figure > a').attr('href') );
+    axios.get('http://afar.com/')
+    .then(res => {
+        const $ = cheerio.load(res.data)
+        console.log('res ', res.data)
+    })
+    .catch(err => {console.log(err)})
+
+   console.log('AAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH')
+//    //Title
+//    console.log($('.ContentList').find('h3 > a').html() );
+//    //Image
+//    console.log($('.ContentList').find('.ListItemThumbnail > a > img').attr('src') );
+//    //Link
+//     console.log($('.ContentList').find('.ListItemThumbnail > a').attr('href') );
+
+//Title
+// console.log($('.block block--article-listing').html())
+// //Image
+// console.log($$('.ContentList').find('.ListItemThumbnail > a > img').attr('src') );
+// //Link
+//  console.log($$('.ContentList').find('.ListItemThumbnail > a').attr('href') );
 
 
 }
