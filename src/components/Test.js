@@ -11,7 +11,6 @@ export default class Test extends Component
     
     callScraper() {
         const t = TravelScraper()
-        console.log(t)
     }
 
     render(){

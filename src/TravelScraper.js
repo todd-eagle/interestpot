@@ -8,14 +8,13 @@ const TravelScraper = async () => {
   // const $ = cheerio.load(html.data)
     // let data =[]
 
-    axios.get('http://afar.com/')
+    axios.get('https://www.empireonline.com/movies/news/')
     .then(res => {
         const $ = cheerio.load(res.data)
         console.log('res ', res.data)
     })
     .catch(err => {console.log(err)})
 
-   console.log('AAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH')
 //    //Title
 //    console.log($('.ContentList').find('h3 > a').html() );
 //    //Image
