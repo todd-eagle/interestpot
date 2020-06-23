@@ -4,11 +4,13 @@ const session = require('express-session');
 const massive = require('massive');
 const authCrtl = require('./controllers/auth-controller')
 const dataCtrl = require('./controllers/data-controller')
+const scraper = require('./controllers/scraper-controller')
+const cors = require('cors')
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
 const app = express();
-
+app.use(cors())
 app.use(express.json());
 app.use(
     session({
@@ -33,4 +35,5 @@ massive({
 
 app.get('/api/categories/:table_name', dataCtrl.getCategories)
 app.post('/api/categories/', dataCtrl.postCategoriesByUser)
-app.get('/api/categories', dataCtrl.getCategoryUrls)
+app.get('/api/categories/', dataCtrl.getCategoryUrls)
+app.get('/api/scraper/', scraper.travelScraper)

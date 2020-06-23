@@ -1,17 +1,17 @@
 import React,  {Component} from 'react'
-import TravelScraper from '../TravelScraper'
+// import TravelScraper from '../TravelScraper'
 
 
 export default class Test extends Component 
 {
 
     componentDidMount(){
-        this.callScraper()
+       // this.callScraper()
     }
     
-    callScraper() {
-        const t = TravelScraper()
-    }
+    // callScraper() {
+    //     const t = TravelScraper()
+    // }
 
     render(){
         return(
