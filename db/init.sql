@@ -65,18 +65,18 @@ CREATE TABLE users (
 
 insert into cat_travel
 values
-(1, 'https://www.travelandleisure.com/travel-news'),
-(2, 'https://www.lonelyplanet.com/news'),
-(3, 'https://suitcasemag.com/'),
-(4, 'https://www.nationalgeographic.com/travel/'),
-(5, 'https://www.afar.com/tips-and-news');
+(1, 'https://www.travelandleisure.com/travel-news', 'travelandleisure'),
+(2, 'https://www.lonelyplanet.com/news', 'lonelyplanet'),
+(3, 'https://suitcasemag.com/', 'suitecasemag'),
+(4, 'https://www.nationalgeographic.com/travel/', 'nationalgeographic'),
+(5, 'https://www.afar.com/tips-and-news', 'afar');
 
 insert into cat_movies
 values
-(1, 'https://screenrant.com/movie-news/'),
-(2, 'https://www.empireonline.com/movies/news/'),
-(3, 'https://collider.com/'),
-(4, 'https://www.cinemablend.com/');
+(1, 'https://screenrant.com/movie-news/', 'screenrant'),
+(2, 'https://www.empireonline.com/movies/news/', 'empireonline'),
+(3, 'https://collider.com/', 'collider'),
+(4, 'https://www.cinemablend.com/', 'cinemablend');
 
 
 insert into cat_food

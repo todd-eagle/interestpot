@@ -33,7 +33,7 @@ massive({
     app.listen( SERVER_PORT, () => console.log(`Connected to port ${SERVER_PORT}`))
 }).catch(err=>console.log(err))
 
-app.get('/api/categories/:table_name', dataCtrl.getCategories)
+app.get('/api/category_tables/:table_name', dataCtrl.getCategories)
 app.post('/api/categories/', dataCtrl.postCategoriesByUser)
-app.get('/api/categories/', dataCtrl.getCategoryUrls)
+app.get('/api/categories/:user_id', dataCtrl.getCategoryUrlData)
 app.get('/api/scraper/', scraper.travelScraper)
