@@ -35,5 +35,7 @@ massive({
 
 app.get('/api/category_tables/:table_name', dataCtrl.getCategories)
 app.post('/api/categories/', dataCtrl.postCategoriesByUser)
-app.get('/api/categories/:user_id', dataCtrl.getCategoryUrlData)
+app.get('/api/categories/:user_id', dataCtrl.getUserCategories)
+app.get('/api/categories/:user_id', dataCtrl.getUserCategories)
+app.get('/api/category-data', dataCtrl.getCategoryData)
 app.get('/api/scraper/', scraper.travelScraper)

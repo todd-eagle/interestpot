@@ -23,11 +23,9 @@ module.exports =  {
 
         res.status(200).send(profile)
     },
-    getCategoryUrlData: async (req, res) => {
+    getUserCategories: async (req, res) => {
         const db = req.app.get('db')
-        console.log(db)
         const {user_id} = req.params
-        console.log(user_id)
 
         const user_categories = await db.user_profile.find({user_id})
         console.log(user_categories);
@@ -37,6 +35,20 @@ module.exports =  {
         }
 
         res.status(200).send(user_categories)
+    },
+    getCategoryData: async (req, res) => {
+        const db = req.app.get('db')
+        req.body = {category : 'cat_travel'}
+        const {category} = req.body
+
+        const categoryData = await db.query(`select * from ${category}`)
+        console.log(categoryData)
+        if(!categoryData) {
+            return res.status(500).send("Cannot locate user categories")
+        }
+
+        res.status(200).send(categoryData)
+
     },
     postArticles: (req, res) => {},
     getArticles: (req, res) => {},
