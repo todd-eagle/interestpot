@@ -1,3 +1,6 @@
+const scrape =require('../scrapers/dataScrape')
+
+
 module.exports =  {
     getCategories: async (req, res) => {
         const db = req.app.get('db')
@@ -38,16 +41,22 @@ module.exports =  {
     },
     getCategoryData: async (req, res) => {
         const db = req.app.get('db')
+        const {user_id} = req.params
         req.body = {category : 'cat_travel'}
         const {category} = req.body
 
         const categoryData = await db.query(`select * from ${category}`)
-        console.log(categoryData)
+
         if(!categoryData) {
             return res.status(500).send("Cannot locate user categories")
         }
 
-        res.status(200).send(categoryData)
+        //res.status(200).send(categoryData)
+
+        const data = await(scrape.scrape(categoryData, user_id))
+
+        res.status(200).send(data)
+
 
     },
     postArticles: (req, res) => {},
