@@ -1,4 +1,5 @@
 const scrape =require('../scrapers/dataScrape')
+const e = require('express')
 
 
 module.exports =  {
@@ -39,6 +40,18 @@ module.exports =  {
 
         res.status(200).send(user_categories)
     },
+    deleteUserCategories: async (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.params
+        const {category} = req.body
+
+        const removeCategories = await db.query(`DELETE FROM user_profile WHERE category = ${category} && user_id = ${user_id}`)
+
+        if(!removeCategories){
+            return res.status(500).send("Delete failed")
+        }
+        res.status(200).send("Delete successful")
+    },
     getCategoryData: async (req, res) => {
         const db = req.app.get('db')
         const {user_id} = req.params
@@ -55,11 +68,51 @@ module.exports =  {
 
         const data = await(scrape.scrape(categoryData, user_id))
 
+        console.log(data);
+        
+
         res.status(200).send(data)
 
 
     },
-    postArticles: (req, res) => {},
+    postUserCategoryLinks: async (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.params
+        const {category} = {category: 'cat_movies'}
+        req.body = [
+            {
+              title: 'Disneyland Reopening Delayed',
+              img: 'https://static3.srcdn.com/wordpress/wp-content/uploads/2020/05/Disneyland-Park-Mickey-and-Minnie.jpg?q=50&fit=crop&w=830&h=419&dpr=1.5 1245w',
+              link: '/disneyland-reopening-date-delayed/'
+            },
+            {
+              title: 'Gone With The Wind Is Back On HBO Max With New Video Intro',
+              img: 'https://static3.srcdn.com/wordpress/wp-content/uploads/2016/11/Gone-With-The-Wind-wallpaper.jpg?q=50&fit=crop&w=316&h=223&dpr=1.5 474w',
+              link: '/gone-wind-movie-hbo-max-video-intro/'
+            },
+            {
+              title: 'HBO Max: Every Movie & TV Show Coming In July 2020',
+              img: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/06/HBO-Max-Movies-July.jpg?q=50&fit=crop&w=316&h=223&dpr=1.5 474w',
+              link: '/hbo-max-july-2020-movies-shows-release-dates/'
+            },
+            {
+              title: 'Russo Brothers Endorse Extraction Movie Recreation Made By Fans',
+              img: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/06/Extraction.jpg?q=50&fit=crop&w=316&h=223&dpr=1.5 474w',
+              link: '/extraction-movie-trailer-fan-remake-russo-brothers-reaction/'
+            }
+          ]
+          for(let i=0; i < req.body.length; i++) {
+            const obj = req.body[i]
+            const {title, img, link} = obj
+            console.log(title)
+            const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
+            if(!insertToDb){
+                return res.status(500).send("Insert failed")
+            }
+          }
+
+          res.status(200).send("Inserts successful")
+    },
     getArticles: (req, res) => {},
     getArticlesByUser: (req, res) => {},
 }

@@ -1,3 +1,5 @@
-EXECUTE format ('SELECT *
-FROM $1
-WHERE user_id = $2');
+INSERT INTO user_landing_page
+(user_id, category, title, img, link)
+VALUES
+($1, $2, $3, $4, $5)
+
