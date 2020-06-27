@@ -54,8 +54,7 @@ module.exports =  {
     },
     getCategoryData: async (req, res) => {
         const db = req.app.get('db')
-        const {user_id} = req.params
-        req.body = {category : 'cat_travel'}
+        req.body = {category : 'cat_movies'}
         const {category} = req.body
 
         const categoryData = await db.query(`select * from ${category}`)
@@ -64,14 +63,18 @@ module.exports =  {
             return res.status(500).send("Cannot locate user categories")
         }
 
-        //res.status(200).send(categoryData)
-
-        const data = await(scrape.scrape(categoryData, user_id))
-
-        console.log(data);
+        try {
+            const data = await scrape.scrape(categoryData)
+            // console.log(data);
+            return res.status(200).send(data)
+        }catch (err){
+           return  res.status(500).send(`Huh?: ${err}`)
+        }
+        
+       
         
 
-        res.status(200).send(data)
+        
 
 
     },
@@ -104,7 +107,7 @@ module.exports =  {
           for(let i=0; i < req.body.length; i++) {
             const obj = req.body[i]
             const {title, img, link} = obj
-            console.log(title)
+           // console.log(title)
             const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
             if(!insertToDb){
                 return res.status(500).send("Insert failed")
