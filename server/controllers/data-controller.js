@@ -65,7 +65,6 @@ module.exports =  {
 
         try {
             const data = await scrape.scrape(categoryData)
-            // console.log(data);
             return res.status(200).send(data)
         }catch (err){
            return  res.status(500).send(`Huh?: ${err}`)
@@ -84,35 +83,87 @@ module.exports =  {
         const {category} = {category: 'cat_movies'}
         req.body = [
             {
-              title: 'Disneyland Reopening Delayed',
-              img: 'https://static3.srcdn.com/wordpress/wp-content/uploads/2020/05/Disneyland-Park-Mickey-and-Minnie.jpg?q=50&fit=crop&w=830&h=419&dpr=1.5 1245w',
-              link: '/disneyland-reopening-date-delayed/'
-            },
-            {
-              title: 'Gone With The Wind Is Back On HBO Max With New Video Intro',
-              img: 'https://static3.srcdn.com/wordpress/wp-content/uploads/2016/11/Gone-With-The-Wind-wallpaper.jpg?q=50&fit=crop&w=316&h=223&dpr=1.5 474w',
-              link: '/gone-wind-movie-hbo-max-video-intro/'
-            },
-            {
-              title: 'HBO Max: Every Movie & TV Show Coming In July 2020',
-              img: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/06/HBO-Max-Movies-July.jpg?q=50&fit=crop&w=316&h=223&dpr=1.5 474w',
-              link: '/hbo-max-july-2020-movies-shows-release-dates/'
-            },
-            {
-              title: 'Russo Brothers Endorse Extraction Movie Recreation Made By Fans',
-              img: 'https://static0.srcdn.com/wordpress/wp-content/uploads/2020/06/Extraction.jpg?q=50&fit=crop&w=316&h=223&dpr=1.5 474w',
-              link: '/extraction-movie-trailer-fan-remake-russo-brothers-reaction/'
+                status: "fulfilled",
+                value: {
+                    '1': {
+                        img: "https://cdn.collider.com/wp-content/uploads/2020/06/rise-of-the-tomb-raider-slice.jpeg",
+                        link: "https://collider.com/ps-plus-free-games-july-2020/",
+                        title: "PlayStation Plus Free Games for July 2020 Include 2015’s ‘Rise of the Tomb Raider’"
+                    },
+                    '2': {
+                        img: "https://cdn.collider.com/wp-content/uploads/2020/06/rise-of-the-tomb-raider-slice.jpeg",
+                        link: "https://collider.com/ps-plus-free-games-july-2020/",
+                        title: "PlayStation Plus Free Games for July 2020 Include 2015’s ‘Rise of the Tomb Raider’"
+                    },
+                    '3': {
+                        img: "https://cdn.collider.com/wp-content/uploads/2020/06/rise-of-the-tomb-raider-slice.jpeg",
+                        link: "https://collider.com/ps-plus-free-games-july-2020/",
+                        title: "PlayStation Plus Free Games for July 2020 Include 2015’s ‘Rise of the Tomb Raider’"
+                    }
+                }
+              },
+              {
+                status: "fulfilled",
+                value: {
+                    '1': {
+                        img: "https://static2.srcdn.com/wordpress/wp-content/uploads/2020/06/Painting-of-Tony-Todd-in-Candyman-brighter.jpg?q=50&fit=crop&w=830&h=419&dpr=1.5 1245w",
+                        link: "/candyman-2020-movie-trailer-tony-todd-role-cameo/",
+                        title: "Candyman Movie Trailer Teases Tony Todd’s Return"
+                    },
+                    '2': {
+                        img: "https://static2.srcdn.com/wordpress/wp-content/uploads/2020/06/Painting-of-Tony-Todd-in-Candyman-brighter.jpg?q=50&fit=crop&w=830&h=419&dpr=1.5 1245w",
+                        link: "/candyman-2020-movie-trailer-tony-todd-role-cameo/",
+                        title: "Candyman Movie Trailer Teases Tony Todd’s Return"
+                    },
+                    '3': {
+                        img: "https://static2.srcdn.com/wordpress/wp-content/uploads/2020/06/Painting-of-Tony-Todd-in-Candyman-brighter.jpg?q=50&fit=crop&w=830&h=419&dpr=1.5 1245w",
+                        link: "/candyman-2020-movie-trailer-tony-todd-role-cameo/",
+                        title: "Candyman Movie Trailer Teases Tony Todd’s Return"
+                    }
+                }
+              },
+              {
+                status: "fulfilled",
+                value: {
+                    '1': {
+                        img: "<div class=\"image-loading\"></div><div style=\"height:100%\" class=\"lazyload-placeholder\"></div>",
+                        link: "/movies/news/jennifer-hudson-is-aretha-franklin-in-the-respect-teaser-trailer/",
+                        title: "Jennifer Hudson Is Aretha Franklin In The Respect Teaser Trailer"
+                    },
+                    '2': {
+                        img: "<div class=\"image-loading\"></div><div style=\"height:100%\" class=\"lazyload-placeholder\"></div>",
+                        link: "/movies/news/jennifer-hudson-is-aretha-franklin-in-the-respect-teaser-trailer/",
+                        title: "Jennifer Hudson Is Aretha Franklin In The Respect Teaser Trailer"
+                    },
+                    '3': {
+                        img: "<div class=\"image-loading\"></div><div style=\"height:100%\" class=\"lazyload-placeholder\"></div>",
+                        link: "/movies/news/jennifer-hudson-is-aretha-franklin-in-the-respect-teaser-trailer/",
+                        title: "Jennifer Hudson Is Aretha Franklin In The Respect Teaser Trailer"
+                    }
+                }
+              }
+        ]
+
+        req.body.forEach( async el =>{
+            for(let key in el.value){
+              console.log(el.value[key])
+              const {img, link, title} = el.value[key]
+              const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
+              if(!insertToDb){
+                  return res.status(500).send("Insert failed")
+              }            
             }
-          ]
-          for(let i=0; i < req.body.length; i++) {
-            const obj = req.body[i]
-            const {title, img, link} = obj
-           // console.log(title)
-            const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
-            if(!insertToDb){
-                return res.status(500).send("Insert failed")
-            }
-          }
+        })
+         
+        //   for(let i=0; i < req.body.length; i++) {
+        //     const obj = req.body[i]
+        //     const {title, img, link} = obj
+        //    // console.log(title)
+        //     const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
+        //     if(!insertToDb){
+        //         return res.status(500).send("Insert failed")
+        //     }
+        //   }
 
           res.status(200).send("Inserts successful")
     },
