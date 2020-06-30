@@ -55,8 +55,8 @@
 
 
     // cinimablend - works!
-    //  data = {
-    //     title: $('#popular').next().find('.story-related-story').attr('title'),
-    //      img:  $('#popular').next().find('.story-cover-image > img').attr('data-src'),
-    //      link:  $('.col-3').find('.story-related-story').attr('href')
-    // } 
+//     set data=('{
+//       "title":" $(elem).attr(''title'')",
+//        "img": "$(elem).find(''.story-cover-image > img'').attr(''data-src'')",
+//        "link": "$(elem).attr(''href'')"
+//   } ')

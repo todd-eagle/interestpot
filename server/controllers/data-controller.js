@@ -1,6 +1,9 @@
 const scrape =require('../scrapers/dataScrape')
 const e = require('express')
 
+const axios = require("axios");
+const cheerio = require('cheerio');
+
 
 module.exports =  {
     getCategories: async (req, res) => {
@@ -54,7 +57,7 @@ module.exports =  {
     },
     getCategoryData: async (req, res) => {
         const db = req.app.get('db')
-        req.body = {category : 'cat_movies'}
+        req.body = {category : 'cat_travel'}
         const {category} = req.body
 
         const categoryData = await db.query(`select * from ${category}`)
@@ -166,7 +169,25 @@ module.exports =  {
         //   }
 
           res.status(200).send("Inserts successful")
-    },
+    }, 
     getArticles: (req, res) => {},
     getArticlesByUser: (req, res) => {},
+    testScrape: async(req, res) => {
+        
+        const html = await axios.get('https://www.travelandleisure.com/travel-news')
+        const $ = await cheerio.load(html.data)	
+
+        const data = {
+            img: $('.category-page-item').find('.category-page-item-image > a > div').attr('data-src'),
+            link: $('.category-page-item').find('.category-page-item-content > a').attr('href'),
+            title: $('.category-page-item').find('.category-page-item-content > a > h3').html()
+          }
+
+        // const data = {
+        //     title: $('.category-page-item-content').find('h3').html(),
+        //     img: $('.category-page-item-image').find('div').attr('data-src'),
+        //     link:  $('.category-page-item-content').find('a').attr('href')
+        //   }
+          res.status(200).send(data)
+    }
 }
