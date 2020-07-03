@@ -43,8 +43,8 @@ class Register extends Component {
         catData = {...catData, category: categoryInfo}
           //console.log(catData)
         await axios.post(`/api/category-data/1`, catData)
+        this.props.history.push('/landing');
     }
-
 
     render(){
         return(
