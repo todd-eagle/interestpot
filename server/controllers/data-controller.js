@@ -1,9 +1,4 @@
 const scrape =require('../scrapers/dataScrape')
-const e = require('express')
-
-const axios = require("axios");
-const cheerio = require('cheerio');
-
 
 module.exports =  {
     getCategories: async (req, res) => {
@@ -20,10 +15,8 @@ module.exports =  {
     },
     postCategoriesByUser: async(req, res) => {
         const db = req.app.get('db')
-        // console.log(req.body);
         
         const profile = await db.user_profile.insert(req.body)  
-        //console.log(profile)
         if(!profile){
             return res.status(500).send("Internal server error: could not insert profile data")
         }
@@ -35,7 +28,6 @@ module.exports =  {
         const {user_id} = req.params
 
         const user_categories = await db.user_profile.find({user_id})
-        //console.log(user_categories);
         
         if(!user_categories) {
             return res.status(500).send("Cannot locate user categories")
@@ -57,8 +49,6 @@ module.exports =  {
     },
     getCategoryData: async (req, res) => {
         const db = req.app.get('db')
-        // req.body = {category : 'cat_travel'}
-        // console.log(req.params);
         const {category} = req.params
 
         const categoryData = await db.query(`select * from ${category}`)
@@ -77,14 +67,10 @@ module.exports =  {
     postUserCategoryLinks: async (req, res) => {
         const db = req.app.get('db')
         const {user_id} = req.params
-        //console.log("user_id:",  user_id);
-        //console.log(req.body)
-        
-       const {category} = req.body
+        const {category} = req.body
 
         req.body.data.forEach( async el =>{
             for(let key in el.value){
-              //console.log(el.value[key])
               const {img, link, title} = el.value[key]
               const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
               if(!insertToDb){
@@ -95,6 +81,16 @@ module.exports =  {
 
           res.status(200).send("Inserts successful")
     }, 
-    getArticles: (req, res) => {},
-    getArticlesByUser: (req, res) => {}
+    getArticlesByUser: async (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.params
+        
+        const getData = await db.user_landing_page.find({user_id})
+
+        if(!getData){
+            return res.status(500).send("Cannot get data")
+        } 
+
+        res.status(200).send(getData)
+    }
 }
