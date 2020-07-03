@@ -10,9 +10,6 @@ class Register extends Component {
         }
     }
 
-    componentDidMount(){
-    }
-
     changeHandler = (e) => {
         // const val =  {[e.target.name]: e.target.value}
         const name = e.target.name
@@ -29,21 +26,23 @@ class Register extends Component {
         let data = []
         if(value===true){
             data.push({user_id:1, category:key, sub_category:''})
-            await this.getCategoryData(key)
+            await this.scrapeData(key)
         }
         // console.log(data)
          await axios.post('/api/categories/', data)  
       }
     }
 
-    getCategoryData = async (categoryInfo) =>{
-        console.log("CategoryInfo",categoryInfo)
+    scrapeData = async (categoryInfo) =>{
+        // console.log("CategoryInfo",categoryInfo)
          const catData = await axios.get(`/api/category-data/${categoryInfo}`)
-         console.log(catData)
+         await this.insertScrapedData(catData,categoryInfo)
     }
 
-    postScrappedInfo = () => {
-
+    insertScrapedData = async (catData, categoryInfo) => {
+        catData = {...catData, category: categoryInfo}
+          //console.log(catData)
+        await axios.post(`/api/category-data/1`, catData)
     }
 
 

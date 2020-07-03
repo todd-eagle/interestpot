@@ -1,7 +1,5 @@
- 
 const axios = require("axios");
 const cheerio = require('cheerio');
-
 
 const  scrape = async (catData) => {
   const n = 3;
@@ -27,13 +25,12 @@ const  scrape = async (catData) => {
   await Promise.allSettled(linkData)
   .then(res => {
     resultsForNow = [...res]
-    console.log(res)
+   // console.log(res)
   })
- // console.log(resultsForNow);
+  // console.log(resultsForNow);
   
   return resultsForNow
 }
-
 
 exports.scrape=scrape
 
