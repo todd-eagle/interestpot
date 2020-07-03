@@ -29,18 +29,21 @@ class Register extends Component {
         let data = []
         if(value===true){
             data.push({user_id:1, category:key, sub_category:''})
+            await this.getCategoryData(key)
         }
-        console.log(data)
+        // console.log(data)
          await axios.post('/api/categories/', data)  
       }
     }
 
-    getCategoryData = (categoryInfo) =>{
-
+    getCategoryData = async (categoryInfo) =>{
+        console.log("CategoryInfo",categoryInfo)
+         const catData = await axios.get(`/api/category-data/${categoryInfo}`)
+         console.log(catData)
     }
 
     postScrappedInfo = () => {
-        
+
     }
 
 

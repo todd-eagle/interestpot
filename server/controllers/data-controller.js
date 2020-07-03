@@ -20,7 +20,7 @@ module.exports =  {
     },
     postCategoriesByUser: async(req, res) => {
         const db = req.app.get('db')
-        console.log(req.body);
+        // console.log(req.body);
         
         const profile = await db.user_profile.insert(req.body)  
         //console.log(profile)
@@ -57,8 +57,9 @@ module.exports =  {
     },
     getCategoryData: async (req, res) => {
         const db = req.app.get('db')
-        req.body = {category : 'cat_travel'}
-        const {category} = req.body
+        // req.body = {category : 'cat_travel'}
+        console.log(req.params);
+        const {category} = req.params
 
         const categoryData = await db.query(`select * from ${category}`)
 
