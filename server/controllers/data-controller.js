@@ -20,7 +20,7 @@ module.exports =  {
     },
     postCategoriesByUser: async(req, res) => {
         const db = req.app.get('db')
-        // console.log(req.body);
+        console.log(req.body);
         
         const profile = await db.user_profile.insert(req.body)  
         //console.log(profile)

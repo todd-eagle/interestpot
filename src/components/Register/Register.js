@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 class Register extends Component {
     constructor(){
@@ -16,13 +17,22 @@ class Register extends Component {
         // const val =  {[e.target.name]: e.target.value}
         const name = e.target.name
         const isChecked = e.target.checked;
-        console.log(isChecked)
+       // console.log(isChecked)
         this.setState(prevState => ({ categories: prevState.categories.set(name, isChecked) }));
     }
     
-    dataGenerator =(e) => {
+    dataGenerator = async (e) => {
        e.preventDefault()
        const cats = this.state.categories
+
+       for (let [key, value] of cats.entries()) {
+        let data = []
+        if(value===true){
+            data.push({user_id:1, category:key, sub_category:''})
+        }
+        console.log(data)
+         await axios.post('/api/categories/', data)  
+      }
     }
 
     render(){

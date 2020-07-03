@@ -19,14 +19,7 @@ const  scrape = async (catData) => {
         p[i+1] = Object.assign(dataStuff)
       }
     })
-    // for(i=0; i<n; i++){
-    //   const dataStuff ={
-    //     img: eval(e.data.img),
-    //     link: eval(e.data.link),
-    //     title: eval(e.data.title)
-    //   }
-    //    p[i+1] = Object.assign(dataStuff)
-    // }
+
     return p
   })
 
