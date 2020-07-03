@@ -35,6 +35,15 @@ class Register extends Component {
       }
     }
 
+    getCategoryData = (categoryInfo) =>{
+
+    }
+
+    postScrappedInfo = () => {
+        
+    }
+
+
     render(){
         return(
             <>
