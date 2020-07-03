@@ -13,14 +13,18 @@ class Register extends Component {
     }
 
     changeHandler = (e) => {
-        const val =  {[e.target.name]: e.target.value}
+        // const val =  {[e.target.name]: e.target.value}
         const name = e.target.name
         const isChecked = e.target.checked;
         console.log(isChecked)
         this.setState(prevState => ({ categories: prevState.categories.set(name, isChecked) }));
     }
     
-    
+    dataGenerator =(e) => {
+       e.preventDefault()
+       const cats = this.state.categories
+    }
+
     render(){
         return(
             <>
@@ -39,6 +43,7 @@ class Register extends Component {
                 <input type="checkbox" id="cat_dyi" name="cat_dyi" onChange={e => this.changeHandler(e)}/>
                 <label>DYI</label>
             </div>
+            <button onClick={e => this.dataGenerator(e)}>Lets Go!</button>
             </>
 
         )
