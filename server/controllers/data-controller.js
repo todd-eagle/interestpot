@@ -1,5 +1,4 @@
 const scrape =require('../scrapers/dataScrape')
-const psl = require('psl');
 
 module.exports =  {
     getCategories: async (req, res) => {
@@ -77,12 +76,10 @@ module.exports =  {
                 if(!(link === undefined)) {
                     if(!(link.includes('https'))){
                         if(url.includes('screenrant') || url.includes('lonelyplanet')){
-                            let parseURL = psl.parse(url)
-                            let parsedUrl = parseURL.domain
-                            url = parsedUrl
+                          url = url.substr(0, url.lastIndexOf("/")) 
                         }
                         link = url.concat('', link)
-                        console.log(link)
+                        //console.log(link)
                     }
                 }
                 const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
