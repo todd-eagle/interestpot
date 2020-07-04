@@ -1,4 +1,5 @@
 const scrape =require('../scrapers/dataScrape')
+const psl = require('psl');
 
 module.exports =  {
     getCategories: async (req, res) => {
@@ -52,7 +53,8 @@ module.exports =  {
         const {category} = req.params
 
         const categoryData = await db.query(`select * from ${category}`)
-
+        //console.log(categoryData);
+        
         if(!categoryData) {
             return res.status(500).send("Cannot locate user categories")
         }
@@ -71,11 +73,22 @@ module.exports =  {
 
         req.body.data.forEach( async el =>{
             for(let key in el.value){
-              const {img, link, title} = el.value[key]
-              const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
-              if(!insertToDb){
-                  return res.status(500).send("Insert failed")
-              }            
+                let {img, link, title, url} = el.value[key]
+                if(!(link === undefined)) {
+                    if(!(link.includes('https'))){
+                        if(url.includes('screenrant') || url.includes('lonelyplanet')){
+                            let parseURL = psl.parse(url)
+                            let parsedUrl = parseURL.domain
+                            url = parsedUrl
+                        }
+                        link = url.concat('', link)
+                        console.log(link)
+                    }
+                }
+                const insertToDb = await db.get_category_data([user_id, category, title, img, link]);
+                if(!insertToDb){
+                    return res.status(500).send("Insert failed")
+                }            
             }
         })
 
@@ -84,7 +97,7 @@ module.exports =  {
     getArticlesByUser: async (req, res) => {
         const db = req.app.get('db')
         const {user_id} = req.params
-        
+
         const getData = await db.user_landing_page.find({user_id})
 
         if(!getData){
