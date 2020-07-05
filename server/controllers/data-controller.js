@@ -76,7 +76,8 @@ module.exports =  {
                 if(!(link === undefined)) {
                     if(!(link.includes('https'))){
                         if(url.includes('screenrant') || url.includes('lonelyplanet')){
-                          url = url.substr(0, url.lastIndexOf("/")) 
+                            //removes everything after the last slash    
+                            url = url.substr(0, url.lastIndexOf("/")) 
                         }
                         link = url.concat('', link)
                         //console.log(link)
@@ -100,6 +101,9 @@ module.exports =  {
         if(!getData){
             return res.status(500).send("Cannot get data")
         } 
+
+       // console.log(getData);
+        
 
         res.status(200).send(getData)
     }

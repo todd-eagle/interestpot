@@ -16,22 +16,8 @@ class Landing extends Component {
     getData = async() => {
         const user_id = 1
         const linkData = await axios.get(`/api/articles/${user_id}`) 
-        this.parseData(linkData)
-       // this.renderPage(linkData.data)
+        this.renderPage(linkData.data)
         
-    }
-
-    parseData = async (data) => {
-        let headerArticles = []
-        let sectionArticles = []
-
-        const categories = data.filter((el, index, arr) => {
-            return index === arr.findIndex((element) => (
-               element.category === el.category
-             ))
-        }).map(el => el.category)
-
-
     }
 
     renderPage = (data) => {
