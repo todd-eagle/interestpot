@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import './Landing.scss'
 
 class Landing extends Component {
     constructor(){
@@ -16,30 +17,35 @@ class Landing extends Component {
     getData = async() => {
         const user_id = 1
         const linkData = await axios.get(`/api/articles/${user_id}`) 
-        this.renderPage(linkData.data)
+        this.parseData(linkData.data)
+       // this.renderPage(linkData.data)
         
     }
 
-    renderPage = (data) => {
-        
-        const rawData = data.map((el, index) => {
-           return <div key={index} className={"Box" + index}>
-              <a href={el.link} target="_blank" rel="noopener noreferrer">
-               <img src={el.img} alt={el.title}/>
-               <h3>{el.title}</h3>
-               </a>
-                     
-           </div>
-        })
-        this.setState({
-            landingPage: rawData
-        })
+    parseData = (data) => {
+
+        const categories = data.filter((el, index, arr) => {
+            return index === arr.findIndex((element) => (
+               element.category === el.category
+             ))
+        }).map(el => el.category)
+
+        this.sectionsData(data, categories)
     }
+
+    sectionsData = (data, arr) => {
+        
+    }
+ 
+    renderHead = (data) => {
+       
+    }
+
 
     render(){
         const {landingPage} = this.state
         return (
-            <div>
+            <div className="landing-head">
                 {landingPage}
             </div>
         )

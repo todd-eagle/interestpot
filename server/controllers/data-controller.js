@@ -75,8 +75,9 @@ module.exports =  {
                 let {img, link, title, url} = el.value[key]
                 if(!(link === undefined)) {
                     if(!(link.includes('https'))){
-                        if(url.includes('screenrant') || url.includes('lonelyplanet')){
-                            //removes everything after the last slash    
+                        if(url.includes('screenrant') || url.includes('lonelyplanet') 
+                          || url.includes('usatoday')){
+                            //removes everything after and including the last slash    
                             url = url.substr(0, url.lastIndexOf("/")) 
                         }
                         link = url.concat('', link)

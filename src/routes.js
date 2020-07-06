@@ -4,7 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 import AuthForm from './components/Form/Form'
 import Register from './components/Register/Register'
 import Dashboard from './components/Dashboard/Dashboard'
-import Landing from './components/Landing/Landing'
+import Landing from './components/Landing/Landing-1'
 import HomePage from './components/Home/Home'
 
 export default (

@@ -2,13 +2,13 @@ const axios = require("axios");
 const cheerio = require('cheerio');
 
 const  scrape = async (catData) => {
-  const n = 3;
+  const n = 0;
   const linkData = catData.map( async  (e, index) => {
     let p = {}
     const html = await axios.get(e.url)
     const $ = await cheerio.load(html.data)
     $(''+ e.root +'').each((i, elem) => {
-      if (i <= 3) {
+      if (i <= n) {
         const dataStuff ={
           img: eval(e.data.img),
           link: eval(e.data.link),
