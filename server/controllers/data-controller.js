@@ -73,6 +73,15 @@ module.exports =  {
         req.body.data.forEach( async el =>{
             for(let key in el.value){
                 let {img, link, title, url} = el.value[key]
+                if(!(img === undefined)) {
+                    if(img.includes('movieweb')){
+                        img = img.substr(0, img.lastIndexOf(" "))
+                    }
+                    if(!(img.includes('https'))){
+                        url = url.substr(0, url.lastIndexOf("/"))
+                        img = url.concat('', img)
+                    }
+                }
                 if(!(link === undefined)) {
                     if(!(link.includes('https'))){
                         if(url.includes('screenrant') || url.includes('lonelyplanet') 
