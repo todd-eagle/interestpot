@@ -30,14 +30,14 @@ class Landing extends Component {
              ))
         }).map(el => el.category)
 
-        const sectionParsed = this.sectionParse(data, categories, 6)
+        const sectionParsed = this.sectionParse(data, categories, 5)
         this.renderSection(sectionParsed, categories)
     }
 
     renderSection = (data, arr=[]) => {
 
         for(let i=0; i<arr.length; i++){
-        const renderedData = data.map((el, index) => {
+            const renderedData = data.map((el, index) => {            
             return <div key={index} className={"section-card"}>
                 <a href={el.link} target="_blank" rel="noopener noreferrer">
                 <img src={el.img} alt={el.title}/>
