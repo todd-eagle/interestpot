@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import './Register.scss'
 
 class Register extends Component {
     constructor(){
@@ -50,7 +51,7 @@ class Register extends Component {
         return(
             <>
             <h2>This is the registration page</h2>
-            <div>
+            <div className="categories">
                 <input type="checkbox" id="cat_movies" name="cat_movies" onChange={e => this.changeHandler(e)}/>
                 <label>Movies</label>
                 <input type="checkbox" id="cat_travel" name="cat_travel" onChange={e => this.changeHandler(e)}/>
