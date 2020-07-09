@@ -31,17 +31,21 @@ class Landing extends Component {
         this.renderSection(sectionParsed, categories)
     }
 
-    renderSection = (data, arr) => {
+    renderSection = (data, arr) =>  {
+        console.log(data)
+        const sections = []
         for(let i=0; i < data.length; i++){
             const renderedSection = this.sectionFormat(data[i])
-        
+            // const siisy = data[i+1] ? p =renderedSection : p.concat(renderedSection)
+
+            let sectionTitle = arr[i].substr(4).toUpperCase()
             let section = <section className="section-cat">
-                                <h2>{arr[i]}</h2>
+                                <h2>{sectionTitle}</h2>
                                 {renderedSection}
                           </section>;
-            
+            sections.push(section)              
             this.setState({
-                landingPage: section
+                landingPage: sections
             })
         }
     }
