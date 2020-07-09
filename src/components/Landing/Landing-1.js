@@ -17,80 +17,65 @@ class Landing extends Component {
     getData = async() => {
         const user_id = 1
         const linkData = await axios.get(`/api/articles/${user_id}`) 
-        this.parseData(linkData.data)
-       // this.renderPage(linkData.data)
-        
+        this.parseData(linkData.data)        
     }
 
     parseData = (data) => {
-
         const categories = data.filter((el, index, arr) => {
             return index === arr.findIndex((element) => (
                element.category === el.category
              ))
         }).map(el => el.category)
 
-        const sectionParsed = this.sectionParse(data, categories, 5)
+        const sectionParsed = this.sectionParse(data, categories)
         this.renderSection(sectionParsed, categories)
     }
 
-    renderSection = (data, arr=[]) => {
-       
-        for(let i=0; i<arr.length; i++){
-           
-           const SectionFormat =  this.sectionFormat(data)
+    renderSection = (data, arr) => {
+        for(let i=0; i < data.length; i++){
+            const renderedSection = this.sectionFormat(data[i])
+        
+            let section = <section className="section-cat">
+                                <h2>{arr[i]}</h2>
+                                {renderedSection}
+                          </section>;
+            
             this.setState({
-                landingPage: SectionFormat
+                landingPage: section
             })
-         }
+        }
+    }
+
+    sectionParse = (data, arr) => {
+        const sectionSort = []
+
+        for(let i=0; i < arr.length; i++) {
+            const sortedData = data.filter(e => e.category === arr[i])
+            sectionSort.push(sortedData)
+        }
+
+        return sectionSort
     }
 
     sectionFormat = (data) => {
-        console.log(data)
-        const renderedData = data.map((el, index) => {            
+
+        const formattedData = data.map((el, index) => {
             return <div key={index} className={"section-card"}>
-                    <a href={el.link} target="_blank" rel="noopener noreferrer">
-                    <img src={el.img} alt={el.title}/>
-                    <h3>{el.title}</h3>
-                    </a>
-            </div>
+                        <a href={el.link} target="_blank" rel="noopener noreferrer">
+                        <img src={el.img} alt={el.title}/>
+                        <h3>{el.title}</h3>
+                        </a>
+                    </div>
         })
-
-         return <section className="section-cat">{renderedData}</section>
-    }
-
-    sectionParse = (data, arr, num=1) => {
-        //parses number of articles per section by category
-        let n=num
-        let parsedData = []
-        for(let i=0; i< arr.length; i++){
-          for(let j=0; j<data.length; j++){
-            if (arr[i] === data[j].category){
-                parsedData.push(data[j])
-              if(j+1===n){
-                n = n+5
-                break
-              }
-            }    
-          }
-        } 
-        return parsedData  
-    }
- 
-    renderHead = (data) => {
-       
-    }
-
-    renderSections = (data) => {
-
+        return formattedData
     }
 
     render(){
         const {landingPage} = this.state
         return (
-            <div className="section-cat">               
+            <>               
                 {landingPage}
-            </div>
+            </>
         )
     }
 }

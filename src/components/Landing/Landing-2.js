@@ -29,7 +29,6 @@ class Landing extends Component {
                <img src={el.img} alt={el.title}/>
                <h3>{el.title}</h3>
                </a>
-                     
            </div>
         })
         this.setState({
