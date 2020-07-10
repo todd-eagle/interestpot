@@ -28,8 +28,7 @@ class Landing extends Component {
              ))
         }).map(el => el.category)
 
-        const categoryParsedd = this.categoryParsed(data, categories)
-        this.renderSection(categoryParsedd, categories)
+        this.renderSection(data, categories, 6)
     }
 
     renderHero = () => {
@@ -40,32 +39,36 @@ class Landing extends Component {
         
     }
 
-    renderSection = (data, arr) =>  {
-        console.log(data)
+    renderSection = (data, categories, num) =>  {
         const sections = []
-        for(let i=0; i < data.length; i++){
-            const renderedSection = this.sectionFormat(data[i])
-
-            let sectionTitle = arr[i].substr(4).toUpperCase()
+        
+        for(let i=0; i< categories.length; i++){
+            let sectionTitle = categories[i].substr(4).toUpperCase()
+            const categoryData = this.grabDataByCategory(data, categories[i], num)
+            const renderedSection = this.sectionFormat(categoryData)
+            
             let section = <section className="section-cat">
                                 <h2>{sectionTitle}</h2>
                                 {renderedSection}
-                          </section>;
-            sections.push(section)              
-        }
+                            </section>;
+            sections.push(section)      
+
+        }   
+
         this.setState({
-            landingPage: sections
+        landingPage: sections
         })
-    }
 
-    categoryParsed = (data, arr) => {
-        const sectionSort = []
-        for(let i=0; i < arr.length; i++) {
-            const sortedData = data.filter(e => e.category === arr[i])
-            sectionSort.push(sortedData)
+    }    
+
+    grabDataByCategory = (data, category, num) => { 
+        let cateforyData = []
+        const filterData =  data.filter(el => category === el.category)
+        for(let i=0; i < num; i++){
+            cateforyData[i+1] = Object.assign(filterData[i])
         }
 
-        return sectionSort
+        return cateforyData
     }
 
     sectionFormat = (data) => {
