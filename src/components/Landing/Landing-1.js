@@ -30,8 +30,18 @@ class Landing extends Component {
 
         this.renderSection(data, categories, 6)
     }
+   
+    
+    renderHeroMain = (data, categories) => {
+    }
 
-    renderHero = () => {
+    formatHeroMain = (data, categories, num) => {
+        const heroData = []
+        let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length));
+        const heroArticle = this.grabDataByCategory(data, categories[randomCategoryIndex], num)
+    }
+
+    renderHeroSide = () => {
 
     }
 
@@ -45,7 +55,7 @@ class Landing extends Component {
         for(let i=0; i< categories.length; i++){
             let sectionTitle = categories[i].substr(4).toUpperCase()
             const categoryData = this.grabDataByCategory(data, categories[i], num)
-            const renderedSection = this.sectionFormat(categoryData)
+            const renderedSection = this.cardFormat(categoryData, 'section-card')
             
             let section = <section className="section-cat">
                                 <h2>{sectionTitle}</h2>
@@ -71,10 +81,10 @@ class Landing extends Component {
         return cateforyData
     }
 
-    sectionFormat = (data) => {
+    cardFormat = (data, classname) => {
 
         const formattedData = data.map((el, index) => {
-            return <div key={index} className={"section-card"}>
+            return <div key={index} className={classname}>
                         <a href={el.link} target="_blank" rel="noopener noreferrer">
                         <img src={el.img} alt={el.title}/>
                         <h3>{el.title}</h3>
