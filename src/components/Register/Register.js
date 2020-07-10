@@ -32,6 +32,7 @@ class Register extends Component {
         // console.log(data)
          await axios.post('/api/categories/', data)  
       }
+        this.props.history.push('/landing');
     }
 
     scrapeData = async (categoryInfo) =>{
@@ -42,9 +43,9 @@ class Register extends Component {
 
     insertScrapedData = async (catData, categoryInfo) => {
         catData = {...catData, category: categoryInfo}
-          //console.log(catData)
+         console.log(catData)
         await axios.post(`/api/category-data/1`, catData)
-        this.props.history.push('/landing');
+        // this.props.history.push('/landing');
     }
 
     render(){

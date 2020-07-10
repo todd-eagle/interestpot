@@ -17,6 +17,7 @@ class Landing extends Component {
     getData = async() => {
         const user_id = 1
         const linkData = await axios.get(`/api/articles/${user_id}`) 
+        console.log(linkData)
         this.parseData(linkData.data)        
     }
 
@@ -27,8 +28,16 @@ class Landing extends Component {
              ))
         }).map(el => el.category)
 
-        const sectionParsed = this.sectionParse(data, categories)
-        this.renderSection(sectionParsed, categories)
+        const categoryParsedd = this.categoryParsed(data, categories)
+        this.renderSection(categoryParsedd, categories)
+    }
+
+    renderHero = () => {
+
+    }
+
+    HeroFormat = () => {
+        
     }
 
     renderSection = (data, arr) =>  {
@@ -36,7 +45,6 @@ class Landing extends Component {
         const sections = []
         for(let i=0; i < data.length; i++){
             const renderedSection = this.sectionFormat(data[i])
-            // const siisy = data[i+1] ? p =renderedSection : p.concat(renderedSection)
 
             let sectionTitle = arr[i].substr(4).toUpperCase()
             let section = <section className="section-cat">
@@ -44,15 +52,14 @@ class Landing extends Component {
                                 {renderedSection}
                           </section>;
             sections.push(section)              
-            this.setState({
-                landingPage: sections
-            })
         }
+        this.setState({
+            landingPage: sections
+        })
     }
 
-    sectionParse = (data, arr) => {
+    categoryParsed = (data, arr) => {
         const sectionSort = []
-
         for(let i=0; i < arr.length; i++) {
             const sortedData = data.filter(e => e.category === arr[i])
             sectionSort.push(sortedData)
@@ -76,6 +83,7 @@ class Landing extends Component {
 
     render(){
         const {landingPage} = this.state
+        console.log(this.state)
         return (
             <>               
                 {landingPage}

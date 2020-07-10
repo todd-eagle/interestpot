@@ -1,3 +1,10 @@
+.main-card-0,
+.main-card-0 img
+{
+  width: 75rem;
+  height: 40rem;
+  }
+
 .section-cat {
     display: flex;
     flex-wrap: wrap;
@@ -14,27 +21,27 @@
     flex-direction: column;
     align-items: center;
     margin: 2rem .8rem 0 .8rem;
-    width: 38rem;
-    height: 23rem;
+    height: 20rem;
+    width: 36rem;
     border-radius: 5px;
     box-shadow: 0px 6px 13px -3px rgba(20,20,20,1);
   }
   
 
   img {
-    align-self: flex-start;
-    height: 23rem;
-    width: 38rem;
+    /* align-self: flex-start; */
+    height: 20rem;
+    width: 36rem;
     border-radius: 5px;
-  
+    box-shadow: 0px 6px 13px -3px rgba(20,20,20,1);
   }
   
   
   h3 {
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2rem;
     padding: 0 1.5rem;
-    margin-top: -12rem;
+    margin-top: -11rem;
     text-shadow: 2px 2px #000000;
     color: white;
   }
