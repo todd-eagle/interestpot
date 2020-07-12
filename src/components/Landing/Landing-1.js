@@ -78,7 +78,7 @@ class Landing extends Component {
             const categoryData = this.grabDataByCategory(data, categories[i], num)
             const renderedSection = this.cardFormat(categoryData, 'section-card')
             
-            let section = <section className="section-cat">
+            let section = <section key={this.randomize(333333333)} className="section-cat">
                                 <h2>{sectionTitle}</h2>
                                 {renderedSection}
                             </section>;
@@ -116,7 +116,7 @@ class Landing extends Component {
     cardFormat = (data, classname) => {
         // console.log("cardFormat data ", data)
         const formattedData = data.map((el, index) => {
-            return <div key={index} className={classname}>
+            return <div key={this.randomize(333333333)} className={classname}>
                         <a href={el.link} target="_blank" rel="noopener noreferrer">
                         <img src={el.img} alt={el.title}/>
                         <h3>{el.title}</h3>
@@ -131,14 +131,14 @@ class Landing extends Component {
         const {section, heroArticle, herosideArticles, middleArticles} = this.state
          console.log(this.state)
         return (
-            <main class="page-main">   
+            <main className="page-main">   
                 <div className="hero-articles"> 
                     {heroArticle}
-                    <div class="side-panel-1">
+                    <div className="side-panel-1">
                         {herosideArticles}
                     </div>
                 </div>
-                <div class="section-main">
+                <div className="section-main">
                     {middleArticles}
                 </div>               
                 {section}

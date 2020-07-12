@@ -6,7 +6,7 @@ export default class Dashboard extends Component {
     constructor() {
         super()
         this.state = {
-
+            allCategories: ''
         }
     }
 
@@ -18,18 +18,29 @@ export default class Dashboard extends Component {
     loadUserCategories = async() => {
         const categories = await axios('/api/categories/1')
         this.renderUserCategories(categories)
+        this.setState({
+            userCategories: categories
+        })
     }
 
     loadAllCategories = async() => {
         const allCategories = await axios('/api/category_tables/cat')
-        return  allCategories
+        this.setState({
+            categories: allCategories
+        })
+        this.renderAllCategories()
     }
 
     renderUserCategories = (categories) => {
 
     }
 
-    renderAllCategories = (categories) => {
+    renderAllCategories = () => {
+        const allCategories = this.state.categories
+        console.log("allCATS = ", allCategories)
+    }
+
+    formatCategories = (categories) => {
 
     }
 

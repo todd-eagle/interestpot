@@ -13,6 +13,5 @@ export default (
         <Route path="/landing" component={Landing} />
         <Route path="/register" component={Register} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="auth" component={AuthForm}  />
     </Switch>
 )
