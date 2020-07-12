@@ -36,7 +36,7 @@ massive({
 app.get('/api/category_tables/:table_name', dataCtrl.getCategories)
 app.post('/api/categories/', dataCtrl.postCategoriesByUser)
 app.get('/api/categories/:user_id', dataCtrl.getUserCategories)
-app.get('/api/categories/:user_id', dataCtrl.getUserCategories)
+// app.get('/api/categories/:user_id', dataCtrl.getUserCategories)
 app.get('/api/category-data/:category', dataCtrl.getCategoryData)
 app.post('/api/category-data/:user_id', dataCtrl.postUserCategoryLinks)
 app.get('/api/articles/:user_id', dataCtrl.getArticlesByUser)

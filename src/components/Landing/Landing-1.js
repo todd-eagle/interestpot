@@ -39,8 +39,8 @@ class Landing extends Component {
     
     renderHeroMain = (data, categories, num) => {
        
-        let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length));
-        const heroArticle = this.grabDataByCategory(data, categories[randomCategoryIndex], num)
+        let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length))
+        const heroArticle = this.grabDataByCategory(data, categories[randomCategoryIndex], num, true)
          console.log("grabDataByCategory: ", heroArticle)
         const renderedArticle = this.cardFormat(heroArticle, 'main-card-0')
 
@@ -52,7 +52,7 @@ class Landing extends Component {
 
     renderHeroSide = (data, categories, num) => {
         let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length)); 
-        const sideArticles = this.grabDataByCategory(data, categories[randomCategoryIndex], num)
+        const sideArticles = this.grabDataByCategory(data, categories[randomCategoryIndex], num, true)
         const renderedArticles = this.cardFormat(sideArticles, 'main-card')
 
         this.setState({
@@ -62,7 +62,7 @@ class Landing extends Component {
 
     renderMiddleArticles = (data, categories, num) => {
         let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length)); 
-        const articles = this.grabDataByCategory(data, categories[randomCategoryIndex], num)
+        const articles = this.grabDataByCategory(data, categories[randomCategoryIndex], num, true)
         const renderedArticles = this.cardFormat(articles, 'prominent-card')
 
         this.setState({
@@ -91,17 +91,26 @@ class Landing extends Component {
         })
     }    
 
-    grabDataByCategory = (data, category, num) => { 
+    grabDataByCategory = (data, category, num, random=false) => { 
         let categoryData = []
         const filterData =  data.filter(el => category === el.category)
          console.log("FlteredData", filterData)
         for(let i=0; i < num; i++){
             if (filterData.length !== 0)
-            categoryData[i] = Object.assign(filterData[i])
-            // console.log("categoryData: ", categoryData[i])
+                if (random === true){
+                    categoryData[i] = Object.assign(filterData[this.randomize(filterData.length)])
+                }else{
+                    categoryData[i] = Object.assign(filterData[i])
+                }
+                // console.log("categoryData: ", categoryData[i])
         }
         // console.log("categoryData Returned: ", categoryData)
         return categoryData
+    }
+
+    randomize = (num) => {
+        let randomIndex =  Math.floor(Math.random() * Math.floor(num))
+        return randomIndex
     }
 
     cardFormat = (data, classname) => {
