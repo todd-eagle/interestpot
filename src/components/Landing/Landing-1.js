@@ -33,7 +33,7 @@ class Landing extends Component {
         
         this.renderHeroMain(data, categories, 1)
         this.renderHeroSide(data, categories, 2)
-        this.renderMiddleArticles(data, categories, 2)
+        this.renderMiddleArticles(data, categories, 3)
         this.renderSection(data, categories, 8)
     }
     

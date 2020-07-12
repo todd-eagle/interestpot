@@ -21,62 +21,67 @@ h3{
 .main-card-0,
 .main-card-0 img
 {
-  width: 65rem;
-  height: 34.2rem;
+  width: 82rem;
+  height: 44rem;
   }
 
 .main-card-0 h3{
-  font-size: 3rem;
+  font-size: 3.2rem;
   margin-top: -19rem;
-  padding: 0 4rem;
+  padding: 0 3rem;
 }  
 
 .main-card {
-  width: 32rem;
-  height: 17rem;
-  margin-bottom: .2rem;
+  width: 37rem;
+  height: 21.7rem;
+  margin-bottom: .5rem;
+  border: 1px solid rgb(212, 212, 212);
  }
 
  .main-card  img{
-  width: 32rem;
-  height: 17rem;
+  width: 37rem;
+  height: 21.7rem;
  }
 
  .main-card h3 {
-   font-size: 1.7rem;
-   padding: 0 2rem;  
+   font-size: 2.1rem;
+   padding: 0 2.3rem;  
    margin-top: -11rem;
  }
  
 .side-panel-1 {
   display: flex;
   flex-direction: column;
-  width: 32rem;
-  padding: 0 .2rem;
+  width: 37rem;
+  padding: 0 .5rem;
  }
+
+
  
  .section-main {
-  margin-top: .2rem;
+   margin-top: 2rem;
   display: flex;
   justify-content: center;
+ 
+
 
 }
 
 .prominent-card{
-  width: 48.4rem;
-  height: 26rem;
-  margin: 0 .2rem;
+  width: 39.6rem;
+  height: 22rem;
+  margin: 0 .25rem;
 }
 
 .prominent-card h3 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   padding: 0 4rem;
-  margin-top: -14rem;
+  margin-top: -11rem;
 }
 
 .prominent-card img{
-  width: 48.4rem;
-  height: 26rem;
+  width: 39.6rem;
+  height: 22rem;
 }
 
 .section-cat {
@@ -106,10 +111,10 @@ h2{
 
 }
 
-.section-cat img {
+.section-card img {
   /* align-self: flex-start; */
   width: 29rem;
-  height: 18rem;
+  height: 17rem;
   border-radius: 3px 3px 0 0;
   /* box-shadow: 0px 6px 13px -3px rgba(20,20,20,1); */
 }
