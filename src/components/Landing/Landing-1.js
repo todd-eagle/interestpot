@@ -6,7 +6,10 @@ class Landing extends Component {
     constructor(){
         super()
         this.state = {
-            landingPage: ''
+            heroArticle: '',
+            herosideArticles: '',
+            middleArticles: '',
+            section: ''
         }
     }
 
@@ -17,7 +20,7 @@ class Landing extends Component {
     getData = async() => {
         const user_id = 1
         const linkData = await axios.get(`/api/articles/${user_id}`) 
-        console.log(linkData)
+        //console.log(linkData)
         this.parseData(linkData.data)        
     }
 
@@ -27,26 +30,44 @@ class Landing extends Component {
                element.category === el.category
              ))
         }).map(el => el.category)
-
-        this.renderSection(data, categories, 6)
+        
+        this.renderHeroMain(data, categories, 1)
+        this.renderHeroSide(data, categories, 2)
+        this.renderMiddleArticles(data, categories, 2)
+        this.renderSection(data, categories, 8)
     }
-   
     
-    renderHeroMain = (data, categories) => {
-    }
-
-    formatHeroMain = (data, categories, num) => {
-        const heroData = []
+    renderHeroMain = (data, categories, num) => {
+       
         let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length));
         const heroArticle = this.grabDataByCategory(data, categories[randomCategoryIndex], num)
+         console.log("grabDataByCategory: ", heroArticle)
+        const renderedArticle = this.cardFormat(heroArticle, 'main-card-0')
+
+        this.setState({
+            heroArticle: renderedArticle
+        })
+
     }
 
-    renderHeroSide = () => {
+    renderHeroSide = (data, categories, num) => {
+        let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length)); 
+        const sideArticles = this.grabDataByCategory(data, categories[randomCategoryIndex], num)
+        const renderedArticles = this.cardFormat(sideArticles, 'main-card')
 
+        this.setState({
+            herosideArticles: renderedArticles
+        })
     }
 
-    HeroFormat = () => {
-        
+    renderMiddleArticles = (data, categories, num) => {
+        let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length)); 
+        const articles = this.grabDataByCategory(data, categories[randomCategoryIndex], num)
+        const renderedArticles = this.cardFormat(articles, 'prominent-card')
+
+        this.setState({
+            middleArticles: renderedArticles
+        })
     }
 
     renderSection = (data, categories, num) =>  {
@@ -66,23 +87,25 @@ class Landing extends Component {
         }   
 
         this.setState({
-        landingPage: sections
+        section: sections
         })
-
     }    
 
     grabDataByCategory = (data, category, num) => { 
-        let cateforyData = []
+        let categoryData = []
         const filterData =  data.filter(el => category === el.category)
+         console.log("FlteredData", filterData)
         for(let i=0; i < num; i++){
-            cateforyData[i+1] = Object.assign(filterData[i])
+            if (filterData.length !== 0)
+            categoryData[i] = Object.assign(filterData[i])
+            // console.log("categoryData: ", categoryData[i])
         }
-
-        return cateforyData
+        // console.log("categoryData Returned: ", categoryData)
+        return categoryData
     }
 
     cardFormat = (data, classname) => {
-
+        // console.log("cardFormat data ", data)
         const formattedData = data.map((el, index) => {
             return <div key={index} className={classname}>
                         <a href={el.link} target="_blank" rel="noopener noreferrer">
@@ -91,16 +114,26 @@ class Landing extends Component {
                         </a>
                     </div>
         })
+       
         return formattedData
     }
 
     render(){
-        const {landingPage} = this.state
-        console.log(this.state)
+        const {section, heroArticle, herosideArticles, middleArticles} = this.state
+         console.log(this.state)
         return (
-            <>               
-                {landingPage}
-            </>
+            <main class="page-main">   
+                <div className="hero-articles"> 
+                    {heroArticle}
+                    <div class="side-panel-1">
+                        {herosideArticles}
+                    </div>
+                </div>
+                <div class="section-main">
+                    {middleArticles}
+                </div>               
+                {section}
+            </main>
         )
     }
 }
