@@ -2,7 +2,7 @@ const axios = require("axios");
 const cheerio = require('cheerio');
 
 const  scrape = async (catData) => {
-  const n = 1;
+  const n = 2;
   const linkData = catData.map( async  (e, index) => {
     let p = {}
     const html = await axios.get(e.url)

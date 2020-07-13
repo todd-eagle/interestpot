@@ -1,6 +1,12 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import './Register.scss'
+import travel from './img/travel.jpg'
+import food from './img/food.jpg'
+import movies from './img/movies.jpg'
+import gaming from './img/gaming.jpg'
+import dyi from './img/dyi.jpg'
+import health from './img/health.jpg'
 
 class Register extends Component {
     constructor(){
@@ -51,22 +57,42 @@ class Register extends Component {
     render(){
         return(
             <>
-            <h2>This is the registration page</h2>
-            <div className="categories">
-                <input type="checkbox" id="cat_movies" name="cat_movies" onChange={e => this.changeHandler(e)}/>
-                <label>Movies</label>
-                <input type="checkbox" id="cat_travel" name="cat_travel" onChange={e => this.changeHandler(e)}/>
-                <label>Travel</label>
-                <input type="checkbox" id="cat_health" name="cat_health" onChange={e => this.changeHandler(e)}/>
-                <label>Health/Fitnes</label>
-                <input type="checkbox" id="cat_food" name="cat_food" onChange={e => this.changeHandler(e)}/>
-                <label>Food</label>
-                <input type="checkbox" id="cat_gaming" name="cat_gaming" onChange={e => this.changeHandler(e)}/>
-                <label>Gaming</label>
-                <input type="checkbox" id="cat_dyi" name="cat_dyi" onChange={e => this.changeHandler(e)}/>
-                <label>DYI</label>
-            </div>
-            <button onClick={e => this.dataGenerator(e)}>Lets Go!</button>
+            <main className="page-main"> 
+                <h2>Select your Interest</h2>
+                <div className="all-categories">
+                    <div className="category-card">
+                        <input type="checkbox" id="cat_movies" name="cat_movies" onChange={e => this.changeHandler(e)}/>
+                        <label for="cat_movies"><img className="checkbox" src={movies} alt="Movies" /></label>
+                        <h3>MOVIES</h3>
+                    </div>
+                    <div className="category-card">
+                        <input type="checkbox" id="cat_travel" name="cat_travel" onChange={e => this.changeHandler(e)}/>
+                        <label for="cat_travel"><img className="checkbox" src={travel} alt="Travel" /></label>
+                        <h3>TRAVEL</h3>
+                    </div>
+                    <div className="category-card">
+                        <input type="checkbox" id="cat_health" name="cat_health" onChange={e => this.changeHandler(e)}/>
+                        <label for="cat_health"><img className="checkbox" src={health} alt="Food"/></label>
+                        <h3>HEALTH</h3>
+                    </div>
+                    <div className="category-card">
+                        <input type="checkbox" id="cat_food" name="cat_food" onChange={e => this.changeHandler(e)}/>
+                        <label for="cat_food"><img className="checkbox" src={food} alt="Food"/></label>
+                        <h3>FOOD</h3>
+                    </div>
+                    <div className="category-card">
+                        <input type="checkbox" id="cat_gaming" name="cat_gaming" onChange={e => this.changeHandler(e)}/>
+                        <label for="cat_gaming"><img className="checkbox" src={gaming} alt="Gaming"/></label>
+                        <h3>GAMING</h3>
+                    </div>
+                    <div className="category-card">
+                        <input type="checkbox" id="cat_dyi" name="cat_dyi" onChange={e => this.changeHandler(e)}/>
+                        <label for="cat_dyi"><img className="checkbox" src={dyi} alt="DYI"/></label>
+                        <h3>DYI</h3>
+                    </div>
+                </div>    
+                <button onClick={e => this.dataGenerator(e)}>Lets Go!</button>
+            </main>
             </>
 
         )
