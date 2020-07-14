@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import './Register.scss'
-import travel from './img/travel.jpg'
-import food from './img/food.jpg'
-import movies from './img/movies.jpg'
-import gaming from './img/gaming.jpg'
-import dyi from './img/dyi.jpg'
-import health from './img/health.jpg'
+import travel from '../../img/travel.jpg'
+import food from '../../img/food.jpg'
+import movies from '../../img/movies.jpg'
+import gaming from '../../img/gaming.jpg'
+import dyi from '../../img/dyi.jpg'
+import health from '../../img/health.jpg'
 
 class Register extends Component {
     constructor(){
