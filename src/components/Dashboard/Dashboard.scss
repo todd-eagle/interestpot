@@ -1,0 +1,15 @@
+.remove {
+    position: absolute;
+    font-size: 1.1rem;
+    width: unset;
+    border-radius: 3px;
+    opacity: .8;
+    font-weight: 600;
+    right: 0;
+    color: white;
+    z-index: 2;
+    background-color: black;
+    padding: .5rem;
+    opacity: .6;
+    cursor: pointer;
+  }

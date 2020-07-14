@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import './Dashboard.scss'
 import travel from '../../img/travel.jpg'
 import food from '../../img/food.jpg'
 import movies from '../../img/movies.jpg'
@@ -58,15 +59,16 @@ export default class Dashboard extends Component {
     }
 
     formatCategories = (categories) => {
-        let cat
-        let catSelections = {travel, movies, food, gaming, health, dyi};
+        let cat    
+        let remove = categories[0].category ? <div className="remove">Remove</div> : null
+        let catSelections = {travel, movies, food, gaming, health, dyi}
         const catagoryMap = categories.map(el => {
             !el.table_name ? cat = el.category : cat = el.table_name      
            let key = cat.substr(4).toLowerCase() 
             return (
                 <div key={this.randomize(20000)} className="category-card">
-                    <div class="remove">Remove</div>
-                    <img class="cat-img" src={catSelections[key]} alt={cat.substr(4).toUpperCase()} />
+                    {remove}
+                    <img className="cat-img" src={catSelections[key]} alt={cat.substr(4).toUpperCase()} />
                     <h3>{cat.substr(4).toUpperCase()}</h3>
                 </div>
             )
