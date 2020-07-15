@@ -13,3 +13,14 @@
     opacity: .6;
     cursor: pointer;
   }
+
+.categories{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 120rem;
+}
+
+.categories h2 {
+  align-self: flex-start;
+  height: 5rem;
+}

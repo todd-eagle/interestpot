@@ -1,0 +1,46 @@
+.confirmation-box{
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  margin-left: -14rem;
+    width: 28rem;
+    height: 14rem;
+    background-color: rgb(240, 240, 240);
+    border: 4px solid #be93bc;
+    border-radius: 30px;
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    padding-top:1.4rem;
+    color: rgb(97, 97, 97);
+ }
+ 
+ .confirm{
+   margin-top: 1rem;
+ }
+ .btn {
+   border-radius: 5px;
+   color: white;
+   background-color: rgb(189, 69, 173);
+   padding: .75rem 1rem;
+   font-size: 1.5rem;
+   border: none;
+   cursor: pointer;
+   margin: 0 1rem;
+  }
+  
+  .btn:hover{
+    background-color: rgb(167, 57, 152);
+  }
+
+
+  .modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 777;
+}

@@ -4,7 +4,6 @@ const session = require('express-session');
 const massive = require('massive');
 const authCrtl = require('./controllers/auth-controller')
 const dataCtrl = require('./controllers/data-controller')
-const scraper = require('./scrapers/scraper-controller')
 const cors = require('cors')
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -36,7 +35,7 @@ massive({
 app.get('/api/category_tables/:table_name', dataCtrl.getCategories)
 app.post('/api/categories/', dataCtrl.postCategoriesByUser)
 app.get('/api/categories/:user_id', dataCtrl.getUserCategories)
-// app.get('/api/categories/:user_id', dataCtrl.getUserCategories)
 app.get('/api/category-data/:category', dataCtrl.getCategoryData)
 app.post('/api/category-data/:user_id', dataCtrl.postUserCategoryLinks)
 app.get('/api/articles/:user_id', dataCtrl.getArticlesByUser)
+app.delete('/api/links/:user_id/:category', dataCtrl.deleteUserCategories)

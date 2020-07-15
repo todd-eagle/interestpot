@@ -37,12 +37,17 @@ module.exports =  {
     },
     deleteUserCategories: async (req, res) => {
         const db = req.app.get('db')
-        const {user_id} = req.params
-        const {category} = req.body
+        const {user_id, category} = req.params
+        console.log(req.params)
+   
+        console.log(`category = '${category}'`)
+        
 
-        const removeCategories = await db.query(`DELETE FROM user_profile WHERE category = ${category} && user_id = ${user_id}`)
+        const removeCategories = await db.query(`DELETE FROM user_profile WHERE category = '${category}' AND user_id = ${user_id}`)
+        const removeListings = await db.query(`DELETE FROM user_landing_page WHERE category = '${category}' AND user_id = ${user_id}`)
 
-        if(!removeCategories){
+
+        if(!removeCategories || !removeListings){
             return res.status(500).send("Delete failed")
         }
         res.status(200).send("Delete successful")
