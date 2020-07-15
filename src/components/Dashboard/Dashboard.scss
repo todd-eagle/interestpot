@@ -14,13 +14,16 @@
     cursor: pointer;
   }
 
-.categories{
+.categories,
+.other-categories{
   display: flex;
   flex-wrap: wrap;
   max-width: 120rem;
+
 }
 
-.categories h2 {
+.categories h2,
+ .other-categories h2{
   align-self: flex-start;
   height: 5rem;
 }

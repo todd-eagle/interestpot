@@ -13,7 +13,7 @@ const ConfirmWindow = (props) => {
              Remove {title}?        
             <div class="confirm">
                 <button class="btn"  onClick={() =>toggleFn()}>Cancel</button>
-                <button class="btn"onClick={() =>{removeFn(userid, category); toggleFn();}}>Confirm</button>
+                <button class="btn" onClick={() =>{removeFn(userid, category); toggleFn();}}>Confirm</button>
             </div>
         </div>
     </div>
