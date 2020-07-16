@@ -33,7 +33,7 @@ class Dashboard extends Component {
     }
 
     loadUserCategories = async() => {
-        const categories = await axios('/api/categories/1')
+        const categories = await axios(`/api/categories/${this.props.user.id}`)
        // console.log("Loading user categories.... ", categories.data)
         this.setState({
             userCategories: categories.data
@@ -145,7 +145,7 @@ class Dashboard extends Component {
     }
 
     dataGenerator = async (category) => {
-      const data = {user_id:1, category:category, sub_category:''}
+      const data = {user_id:this.props.user.id, category:category, sub_category:''}
        await this.scrapeData(category)
 
         //console.log(data)
@@ -163,7 +163,7 @@ class Dashboard extends Component {
      insertScrapedData = async (catData, categoryInfo) => {
          catData = {...catData, category: categoryInfo}
         //  console.log(catData)
-         await axios.post(`/api/category-data/1`, catData)
+         await axios.post(`/api/category-data/${this.props.user.id}`, catData)
         // console.log("addedCategory", addedCategory)
      } 
 

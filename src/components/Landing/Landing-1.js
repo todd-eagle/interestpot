@@ -20,7 +20,7 @@ class Landing extends Component {
     }
     
     getData = async() => {
-        const user_id = this.props.id
+        const user_id = this.props.user.id
         const linkData = await axios.get(`/api/articles/${user_id}`) 
         //console.log(linkData)
         this.parseData(linkData.data)        
