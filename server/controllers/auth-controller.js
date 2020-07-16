@@ -16,14 +16,14 @@ module.exports = {
         console.log("hashed password: ", hash)
       
         const newUser = await db.users.insert({email:email, password:hash}) 
-
-         console.log("newUser", newUser)
-      
+    
+        
         req.session.user = {
-            id: newUser.id,
-            email: newUser.email
+          id: newUser.id,
+          email: newUser.email
         }
-            
+        
+        console.log("req.session.user", req.session.user)
         res.status(200).send(req.session.user)
     },
     

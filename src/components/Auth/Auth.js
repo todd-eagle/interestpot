@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {login} from '../../redux/reducers/AuthReducer';
 import Axios from 'axios';
 
-const Auth = () => {
+const Auth = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     // const [confirm, setConfirm] = useState('')
@@ -12,13 +12,15 @@ const Auth = () => {
         try {
         const register = await Axios.post('/api/auth/register', {email, password})
         console.log(register.data)
-        this.props.history.push('/register');
+        props.login(register.data)
+        props.history.push('/register');
         }catch{(console.error())}
         
     }
 
     return (
         <>
+        {console.log(props)}
         <div className="auth">
             <input type="text" className="authInput" id="email" 
             name="email" placeholder="Email" required onChange={e => setEmail(e.target.value)} />

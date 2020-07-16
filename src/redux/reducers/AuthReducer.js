@@ -2,13 +2,14 @@ import axios from 'axios'
 
 const initialState = {
    user: {},
-   isLogdgedIn: false
+   isLoggedIn: false
 }
 
 const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 
 export const login = (user) => {
+    console.log("user redux", user)
     return {
         type: LOGIN_USER, 
         payload: user
@@ -25,10 +26,10 @@ export const logout = () => {
 }
 
 export default function (state = initialState, action){
-    console.log(action.type)
+    console.log("Action Type",action.type)
     switch (action.type) {
         case LOGIN_USER:
-            return{...state, user: action.payload, isLogdgedIn: true}
+            return{...state, user: action.payload, isLoggedIn: true}
         case LOGOUT_USER  + '_FULFILLED':
             return{...state, ...action.payload}
         default:
