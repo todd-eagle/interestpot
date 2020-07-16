@@ -5,15 +5,19 @@ module.exports = {
         const db = req.app.get('db');
         const {email, password} = req.body
 
-        const [registered] = await db.check_for_user(email)
+        const [registered] = await db.users.find({email})
+        // console.log("Registered? ", registered)
 
         if(registered){
             return res.status(409).send('User already exists')
         }
 
         const hash = (bcryptjs.hashSync(password, bcryptjs.genSaltSync(10)))
+        console.log("hashed password: ", hash)
+      
+        const newUser = await db.users.insert({email:email, password:hash}) 
 
-        const [newUser] = await db.register_user([email, hash])
+         console.log("newUser", newUser)
       
         req.session.user = {
             id: newUser.id,
@@ -39,7 +43,6 @@ module.exports = {
           req.session.user = {
             id: userFound.id,
             email: userFound.email,
-            profile_pic: userFound.profile_pic
           }
           return res.status(200).send(req.session.user)
         }

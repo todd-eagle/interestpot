@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux';
+
 import './Landing.scss'
 
 class Landing extends Component {
@@ -18,7 +20,7 @@ class Landing extends Component {
     }
     
     getData = async() => {
-        const user_id = 1
+        const user_id = this.props.id
         const linkData = await axios.get(`/api/articles/${user_id}`) 
         //console.log(linkData)
         this.parseData(linkData.data)        
@@ -148,4 +150,5 @@ class Landing extends Component {
 }
 
 
-export default Landing
+const mapStateToProps =  reduxState => reduxState
+export default connect(mapStateToProps)(Landing)

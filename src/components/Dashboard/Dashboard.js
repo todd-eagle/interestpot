@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux';
 import axios from 'axios'
 import './Dashboard.scss'
 import travel from '../../img/travel.jpg'
@@ -11,7 +12,7 @@ import photography from '../../img/photography.jpg'
 import ConfirmWindow from './ConfirmWindow/ConfirmWindow'
 
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
 
     constructor() {
         super()
@@ -33,7 +34,7 @@ export default class Dashboard extends Component {
 
     loadUserCategories = async() => {
         const categories = await axios('/api/categories/1')
-        console.log("Loading user categories.... ", categories.data)
+       // console.log("Loading user categories.... ", categories.data)
         this.setState({
             userCategories: categories.data
         })
@@ -84,7 +85,7 @@ export default class Dashboard extends Component {
 
     renderUserCategories = (categories) => {
        
-        console.log("userCategories: ", categories)
+        //console.log("userCategories: ", categories)
         const userFormattedCategories =this.formatCategories(categories)
         this.setState({
             userFormattedCategories: userFormattedCategories,
@@ -101,7 +102,7 @@ export default class Dashboard extends Component {
     }
 
     formatCategories = (categories) => {
-        console.log(categories.length)
+        //console.log(categories.length)
         if(categories.length > 0){
             let cat    
             let remove = categories[0].category ? <div className="remove">Remove</div> : null
@@ -129,7 +130,7 @@ export default class Dashboard extends Component {
     }
 
     remove = async(user_id, category) => {
-        console.log("user_id: ", user_id)
+        //console.log("user_id: ", user_id)
         await axios.delete(`/api/links/${user_id}/${category}`)
         const filteredCategories = this.state.userCategories.filter(el=> el.category !== category)
         this.setState({
@@ -147,14 +148,14 @@ export default class Dashboard extends Component {
       const data = {user_id:1, category:category, sub_category:''}
        await this.scrapeData(category)
 
-        console.log(data)
+        //console.log(data)
          await axios.post('/api/categories/', data)  
          this.loadUserCategories()
          this.loadAllCategories()
      }
  
      scrapeData = async (categoryInfo) =>{
-          console.log("CategoryInfo",categoryInfo)
+         // console.log("CategoryInfo",categoryInfo)
           const catData = await axios.get(`/api/category-data/${categoryInfo}`)
           await this.insertScrapedData(catData,categoryInfo)
      }
@@ -162,8 +163,8 @@ export default class Dashboard extends Component {
      insertScrapedData = async (catData, categoryInfo) => {
          catData = {...catData, category: categoryInfo}
         //  console.log(catData)
-         const addedCategory = await axios.post(`/api/category-data/1`, catData)
-         console.log("addedCategory", addedCategory)
+         await axios.post(`/api/category-data/1`, catData)
+        // console.log("addedCategory", addedCategory)
      } 
 
     render(){
@@ -189,3 +190,5 @@ export default class Dashboard extends Component {
         )
     }
 }
+const mapStateToProps =  reduxState => reduxState
+export default connect(mapStateToProps)(Dashboard)

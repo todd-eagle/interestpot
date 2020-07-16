@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 
 function Home() {
     return (
@@ -8,4 +10,5 @@ function Home() {
     );
 }
 
-export default Home;
+const mapStateToProps =  reduxState => reduxState
+export default connect(mapStateToProps)(Home)

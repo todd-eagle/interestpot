@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux';
 import axios from 'axios'
 import './Register.scss'
 import travel from '../../img/travel.jpg'
@@ -32,7 +33,7 @@ class Register extends Component {
        for (let [key, value] of cats.entries()) {
         let data = []
         if(value===true){
-            data.push({user_id:1, category:key, sub_category:''})
+            data.push({user_id:this.props.id, category:key, sub_category:''})
             await this.scrapeData(key)
         }
         // console.log(data)
@@ -50,7 +51,7 @@ class Register extends Component {
     insertScrapedData = async (catData, categoryInfo) => {
         catData = {...catData, category: categoryInfo}
        //  console.log(catData)
-        await axios.post(`/api/category-data/1`, catData)
+        await axios.post(`/api/category-data/${this.props.id}`, catData)
         // this.props.history.push('/landing');
     }
 
@@ -99,4 +100,5 @@ class Register extends Component {
     }
 }
 
-export default Register;
+const mapStateToProps =  reduxState => reduxState
+export default connect(mapStateToProps)(Register)
