@@ -56,7 +56,6 @@ class Register extends Component {
     }
 
     render(){
-        console.log("this.props.")
         return(
             <>
             <main className="page-main"> 

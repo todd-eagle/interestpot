@@ -13,7 +13,7 @@ module.exports = {
         }
 
         const hash = (bcryptjs.hashSync(password, bcryptjs.genSaltSync(10)))
-        console.log("hashed password: ", hash)
+       // console.log("hashed password: ", hash)
       
         const newUser = await db.users.insert({email:email, password:hash}) 
     
@@ -23,7 +23,7 @@ module.exports = {
           email: newUser.email
         }
         
-        console.log("req.session.user", req.session.user)
+       // console.log("req.session.user", req.session.user)
         res.status(200).send(req.session.user)
     },
     
@@ -44,9 +44,18 @@ module.exports = {
             id: userFound.id,
             email: userFound.email,
           }
+          req.session.save()
           return res.status(200).send(req.session.user)
         }
              res.status(403).send('Email or password is incorrect')
+    },
+
+    getSessionUser: (req, res) => {
+      if(req.session.user){
+        res.status(200).send(req.session.user)
+      }else{
+        res.sendStatus(500)
+      }
     },
 
     logout: (req, res) => {

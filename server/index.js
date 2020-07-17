@@ -43,4 +43,5 @@ app.delete('/api/links/:user_id/:category', dataCtrl.deleteUserCategories)
 app.post('/api/auth/register', authCtrl.register)
 app.post('/api/auth/login', authCtrl.login)
 app.delete('/api/auth/logout', authCtrl.logout)
+app.get('/api/auth/session', authCrtl.getSessionUser)
 

@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux';
+import {login} from '../../redux/reducers/AuthReducer';
 
 import './Landing.scss'
 
 class Landing extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             heroArticle: '',
             herosideArticles: '',
@@ -15,14 +16,15 @@ class Landing extends Component {
         }
     }
 
-    componentDidMount(){
+    async componentDidMount (){
+        const user = await axios.get('/api/auth/session')
+        this.props.login(user.data)
         this.getData()
     }
     
     getData = async() => {
         const user_id = this.props.user.id
         const linkData = await axios.get(`/api/articles/${user_id}`) 
-        //console.log(linkData)
         this.parseData(linkData.data)        
     }
 
@@ -151,4 +153,4 @@ class Landing extends Component {
 
 
 const mapStateToProps =  reduxState => reduxState
-export default connect(mapStateToProps)(Landing)
+export default connect(mapStateToProps, {login})(Landing)
