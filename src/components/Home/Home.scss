@@ -1,0 +1,112 @@
+.hero {
+    display: flex;
+    align-items: center;
+    background-image: url("../../img/backbround.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    z-index: 96;
+  
+  }
+  
+  .hero h1 {
+    font-size: 5.3rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    /* margin-top: -5rem; */
+    margin-left: 6rem;
+  }
+  
+  .hero-left{
+    max-width: 70rem;
+  }
+  
+  .hero-left p{
+    margin-top: 2rem;
+    color: white;
+    margin-left: 6.2rem;
+    font-size: 2rem;
+  
+  }
+  
+  .hero .btn{
+    font-size: 2rem;
+    border-radius: 20px;
+    border: none;
+    padding: 1rem 2rem;
+    background-color: #f2f2f2;
+    color: black;
+    margin-left: 6.2rem;
+    margin-top: 5rem;
+  }
+  
+  .header-home {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 98vw;
+  }
+  
+  .header-home .logo-home {
+    width: 4.3rem;
+    height: 3rem;
+  }
+  
+  .title-logo {
+    /* padding: 3rem 4rem; */
+    margin-top: 3rem;
+    margin-left: 6rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .title {
+    color:white;
+    margin-left: 1rem;
+    font-size: 3.5rem;
+    font-weight: 700;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+  }
+  
+  .menu-content{
+    margin-top: 5.2rem;
+    margin-right: 6rem;
+     cursor: pointer;
+  }
+  
+  .nav-icon {
+    /* margin-top: 1.5rem; */
+    /* @media only screen and (max-width: $bp-tab-land) { */
+        position: relative;
+  
+    }
+  
+    .nav-icon,
+    .nav-icon::before,
+    .nav-icon::after {
+        width: 3.5rem;
+        height: 3px;
+        background-color:#303654;
+        display: inline-block;
+        /* background-color: transparent; */
+    }
+  
+    .nav-icon::before,
+    .nav-icon::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        transition: all .2s;
+    }
+  
+    .nav-icon::before { top: -.8rem; }
+    .nav-icon::after { top: .8rem; }
+  
+  

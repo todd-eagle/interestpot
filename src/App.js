@@ -10,11 +10,10 @@ import Axios from 'axios';
 
 function App(props) {
   useEffect( async () => {
-    // console.log("useEffects")
     const user = await Axios.get('/api/auth/session')
     props.login(user.data)
    }, [])
-
+   
   return (
     <div className="App">
       {routes}
