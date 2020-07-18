@@ -12,9 +12,12 @@ function Home() {
 
   const renderMenu = () => {
     return <nav className="menu">
-              <a href="#" className="menu-item">Login</a>
-              <a href="#"  className="menu-item">Register</a>
-              <a href="#"  className="menu-item">Account</a>
+              <span className="nav-icon nav-icon__close" onClick={() => toggleMenu()}>&nbsp;</span>
+                <div className="menu-box">
+                    <a href="#" className="menu-item">Login</a>
+                    <a href="#"  className="menu-item">Register</a>
+                    <a href="#"  className="menu-item">Account</a>
+                </div>    
           </nav>
   }
     return (
@@ -36,7 +39,7 @@ function Home() {
                 <div className="hero-left">
                     <h1>All Your Interests in one Convenient Space.</h1>
                     <p>
-                        Tell us what your interest are and leave the rest to us.
+                       Tell us your interests and leave the rest to us. 
                     </p>
                     <button className="btn">Get Started</button>
                 </div>

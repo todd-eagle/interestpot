@@ -70,10 +70,24 @@
   }
   
   .menu {
-    display: flex;
-    flex-direction: column;
+    position: absolute;
     margin-top: 3rem;
+    background-color: #394b80;
+    padding: 1rem 0;
+    top: -3rem;
+    right: -1.5rem;
+    width: 20rem;
+    height: 100vh;
+    box-shadow: -5px 2px 6px -3px rgba(0,0,0,0.75);
   }
+  
+  .menu a {
+    font-size: 2.2rem;
+    padding: 0 0 1rem 0;
+    /* background-color: white; */
+    text-align: center;
+    color: white;
+  } 
   
   .menu-content{
     margin-top: 5.2rem;
@@ -81,6 +95,11 @@
      cursor: pointer;
   }
   
+  .menu-box {
+    display: flex;
+    flex-direction: column;
+  }
+
   .nav-icon {
     /* margin-top: 1.5rem; */
     /* @media only screen and (max-width: $bp-tab-land) { */
@@ -109,4 +128,21 @@
     .nav-icon::before { top: -.8rem; }
     .nav-icon::after { top: .8rem; }
   
-  
+  .nav-icon__close {
+    background-color:transparent;
+    margin: 3rem 2rem;
+  }
+   
+  .nav-icon__close::before {
+        top: 0;
+        width: 2rem;
+        transform: rotate(45deg);
+        background-color: #fff;
+    }
+
+    .nav-icon__close::after {
+        top: 0;
+        width: 2rem;
+        transform: rotate(-45deg);
+        background-color: #fff;
+    } 
