@@ -9,7 +9,7 @@ const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 
 export const login = (user) => {
-    console.log("user redux", user)
+    // console.log("user redux", user)
     return {
         type: LOGIN_USER, 
         payload: user
@@ -26,7 +26,7 @@ export const logout = () => {
 }
 
 export default function (state = initialState, action){
-    console.log("Action Type",action.type)
+    // console.log("Action Type",action.type)
     switch (action.type) {
         case LOGIN_USER:
             return{...state, user: action.payload, isLoggedIn: true}

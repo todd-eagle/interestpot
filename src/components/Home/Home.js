@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import './Home.scss'
@@ -12,6 +12,12 @@ function Home(props) {
   const toggleMenu = () => setMenu(!isMenuOpen)
 
   const isLoggedIn = props.isLoggedIn
+
+  useEffect( () => {
+    isLoggedIn ? props.history.push('/landing') : props.history.push('/')
+   }, [])
+
+
   const renderMenu = () => {
     return <nav className="menu">
               <span className="nav-icon nav-icon__close" onClick={() => toggleMenu()}>&nbsp;</span>

@@ -9,8 +9,10 @@ import './App.scss';
 import Axios from 'axios';
 
 function App(props) {
+  
   useEffect( async () => {
     const user = await Axios.get('/api/auth/session')
+    // console.log("User: ", user.data)
     props.login(user.data)
    }, [])
    

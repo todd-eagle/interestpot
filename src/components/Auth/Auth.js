@@ -2,19 +2,18 @@ import React,  { useState }  from 'react'
 import {connect} from 'react-redux';
 import {login} from '../../redux/reducers/AuthReducer';
 import {Link} from 'react-router-dom';
-import Axios from 'axios';
+import axios from 'axios';
 import logo from '../../img/logo.png'
 import './Auth.scss'
 
 const Auth = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    // const [confirm, setConfirm] = useState('')
 
     const handleSubmit = async e => {
         try {
-        const register = await Axios.post('/api/auth/register', {email, password})
-        console.log(register.data)
+        const register = await axios.post('/api/auth/register', {email, password})
+        console.log("register: ", register)
         props.login(register.data)
         props.history.push('/register');
         }catch{(console.error())}     
@@ -22,7 +21,7 @@ const Auth = (props) => {
 
     return (
         <>
-        {/* {console.log(props)} */}
+        {/* {console.log("props: ", props)} */}
         <header class="header-page">
             <Link to="/">
             <div class="title-logo">  
