@@ -1,0 +1,75 @@
+.login-reg-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../img/background2.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+ }
+
+ .login-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 40rem;
+    border-radius: 5px;
+    opacity: .9;
+    box-shadow: 3px 3px 8px -3px rgba(138,138,138,1);
+    padding: 4rem 0;
+  }
+
+ .login-box input {
+   width: 35rem;
+   height: 4rem;
+   margin-bottom: 1.5rem;
+   border-radius: 7px;
+   border: 1px solid grey;
+   font-size: 2rem;
+   padding-left: 1rem;
+ }
+ ::placeholder {
+  color: rgb(156, 156, 156);
+ }
+
+ .login-box h2 {
+   flex-basis: unset;
+   color: #374572;
+   font-weight: 700;
+   font-size: 3rem;
+ }
+
+ .login-box .btn{
+   margin-top: 2rem;
+   padding: 1rem 2rem;
+   background-color: #483966;
+ }
+
+ .login-box .login-text {
+   width: 33rem;
+   font-size: 1.6rem;
+   padding: 1.5rem 0 2rem 0;
+ }
+
+ .header-page {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 100vw;
+ }
+
+ .header-page .logo-home{
+  width: 3rem;
+  height: 2.5rem;
+ }
+
+ .header-page .title {
+   font-size: 3.5rem;
+ }
+
+ .header-page .title-logo {
+    margin-left: unset;
+ }
