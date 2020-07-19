@@ -29,8 +29,7 @@ const Auth = (props) => {
                 <img class="logo-home" src={logo} alt="InterestPot"/>
                 <div class="title">
                     InterestPot
-                </div>
-                
+                </div>    
             </div>
             </Link>
         </header>
