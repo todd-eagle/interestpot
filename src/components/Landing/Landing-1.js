@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {login} from '../../redux/reducers/AuthReducer';
+import logo from './../../img/logo.png'
 
 import './Landing.scss'
 
@@ -12,7 +14,8 @@ class Landing extends Component {
             heroArticle: '',
             herosideArticles: '',
             middleArticles: '',
-            section: ''
+            section: '',
+            isMenuOpen: false
         }
     }
 
@@ -21,7 +24,9 @@ class Landing extends Component {
         this.props.login(user.data)
         this.getData()
     }
-    
+
+    toggleMenu = () => this.setState({isMenuOpen: !this.state.isMenuOpen})
+
     getData = async() => {
         const user_id = this.props.user.id
         const linkData = await axios.get(`/api/articles/${user_id}`) 
@@ -39,6 +44,18 @@ class Landing extends Component {
         this.renderHeroSide(data, categories, 2)
         this.renderMiddleArticles(data, categories, 3)
         this.renderSection(data, categories, 12)
+    }
+
+    renderMenu = () => {
+        const isLoggedIn = this.props.isLoggedIn
+        return <nav className="menu">
+                  <span className="nav-icon nav-icon__close" onClick={() => this.toggleMenu()}>&nbsp;</span>
+                    <div className="menu-box">
+                      <Link className="menu-item" to={isLoggedIn ? '/landing' : '/auth'}>Logout</Link>
+                      <Link className="menu-item" to={isLoggedIn ? '/landing' : '/auth'}>Profile</Link>
+                      <Link className="menu-item" to={isLoggedIn ? '/dashboard' : '/auth'}>Dashboard</Link>
+                    </div>    
+              </nav>
     }
     
     renderHeroMain = (data, categories, num) => {
@@ -135,18 +152,32 @@ class Landing extends Component {
         const {section, heroArticle, herosideArticles, middleArticles} = this.state
          console.log(this.state)
         return (
-            <main className="page-main">   
-                <div className="hero-articles"> 
-                    {heroArticle}
-                    <div className="side-panel-1">
-                        {herosideArticles}
+            <>
+                <div class="header-landing">
+                    <div class="title-logo">
+                        <img class="logo-home" src={logo} />
+                        <div class="title">
+                            InterestPot
+                        </div>
                     </div>
-                </div>
-                <div className="section-main">
-                    {middleArticles}
-                </div>               
-                {section}
-            </main>
+                    <div className="menu-content" onClick={() => this.toggleMenu()}>
+                        <span class="nav-icon">&nbsp;</span>
+                        {this.state.isMenuOpen ? this.renderMenu() : null}
+                    </div>
+                </div>  
+                <main className="page-main">   
+                    <div className="hero-articles"> 
+                        {heroArticle}
+                        <div className="side-panel-1">
+                            {herosideArticles}
+                        </div>
+                    </div>
+                    <div className="section-main">
+                        {middleArticles}
+                    </div>               
+                    {section}
+                </main>
+            </>
         )
     }
 }

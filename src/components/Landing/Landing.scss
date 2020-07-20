@@ -1,3 +1,44 @@
+.header-landing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:#343F66;
+  margin-bottom: 4rem;
+  height: 8rem;
+}
+
+.header-landing .logo-home {
+  width: 4rem;
+  height: 2.7rem;
+}
+
+.header-landing .title{
+  font-size: 3rem;
+}
+
+.header-landing .title-logo {
+  margin-top: unset;
+  margin-left: 14rem;
+}
+
+.header-landing .menu-content {
+  margin-right: 14rem;
+  margin-top: 2rem;;
+}
+
+.header-landing .menu-content .nav-icon,
+.header-landing .menu-content .nav-icon::before,
+.header-landing .menu-content .nav-icon::after {
+ 
+  background-color:white !important;
+}
+
+.header-landing .menu-content .nav-icon__close {
+  background-color:transparent !important;
+  margin: 3rem 2rem;
+}
+ 
+
 h3{
   color: white;
   text-shadow: 2px 2px #000000
@@ -55,10 +96,8 @@ h3{
   width: 37rem;
   padding: 0 .5rem;
  }
-
-
  
- .section-main {
+.section-main {
    margin-top: 2rem;
   display: flex;
   justify-content: center;
@@ -66,7 +105,7 @@ h3{
 
 .prominent-card{
   width: 39.6rem;
-  height: 23em;
+  height: 20rem;
   margin: 0 .25rem;
 }
 
@@ -78,7 +117,7 @@ h3{
 
 .prominent-card img{
   width: 39.6rem;
-  height: 23rem;
+  height: 20rem;
 }
 
 .section-cat {
