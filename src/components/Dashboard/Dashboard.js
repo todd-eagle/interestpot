@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import axios from 'axios'
+import {Link} from 'react-router-dom';
+import {logout} from '../../redux/reducers/AuthReducer';
+import logo from './../../img/logo.png'
+import Footer from '../Footer/Footer'
 import './Dashboard.scss'
 import travel from '../../img/travel.jpg'
 import food from '../../img/food.jpg'
@@ -14,8 +18,8 @@ import ConfirmWindow from './ConfirmWindow/ConfirmWindow'
 
 class Dashboard extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             allCategories: '',
             userFormattedCategories: '',
@@ -23,7 +27,8 @@ class Dashboard extends Component {
             openedWindow: false,
             user_id: '',
             category: '',
-            categories:''
+            categories:'',
+            isLoading: false
         }
     }
 
@@ -32,7 +37,11 @@ class Dashboard extends Component {
         this.loadAllCategories()
     }
 
+    toggleMenu = () => this.setState({isMenuOpen: !this.state.isMenuOpen})
+
+
     loadUserCategories = async() => {
+        if(!this.props.isLoggedIn){this.props.history.push('/login')}
         const categories = await axios(`/api/categories/${this.props.user.id}`)
        // console.log("Loading user categories.... ", categories.data)
         this.setState({
@@ -66,13 +75,26 @@ class Dashboard extends Component {
         this.renderCategories()
     }
 
+    renderMenu = () => {
+        const isLoggedIn = this.props.isLoggedIn
+        return <nav className="menu">
+                  <span className="nav-icon nav-icon__close" onClick={() => this.toggleMenu()}>&nbsp;</span>
+                    <div className="menu-box">       
+                        <Link onClick={e => this.props.logout()} className="menu-item" to='/login'>Logout</Link>
+                        <Link className="menu-item" to='/landing'>Your Site</Link>
+                        <Link className="menu-item" to='/profile'>Profile</Link>
+                    </div>    
+              </nav>
+    }
+    
     async renderCategories(){
         let catSelections = {travel, movies, food, gaming, health, dyi, photography}
         let cat
         const tableInfo = this.state.categories
         const catTables = tableInfo.map((el) =>{
             !el.table_name ? cat = el.category : cat = el.table_name
-            let key = cat.substr(4).toLowerCase()     
+            let key = cat.substr(4).toLowerCase()
+            cat.includes("photography") ? cat="cat_photos" : cat = cat  
                 return <div key={this.randomize(200000)} onClick={()=>this.dataGenerator(el.table_name)}  className="category-card" >
                                 <img className="cat-img" src={catSelections[key]} alt={cat.substr(4).toUpperCase()} />
                                 <h3>{cat.substr(4).toUpperCase()}</h3>
@@ -146,7 +168,8 @@ class Dashboard extends Component {
 
     dataGenerator = async (category) => {
       const data = {user_id:this.props.user.id, category:category, sub_category:''}
-       await this.scrapeData(category)
+        this.setState({isLoading: true})
+        await this.scrapeData(category)
 
         //console.log(data)
          await axios.post('/api/categories/', data)  
@@ -165,30 +188,46 @@ class Dashboard extends Component {
         //  console.log(catData)
          await axios.post(`/api/category-data/${this.props.user.id}`, catData)
         // console.log("addedCategory", addedCategory)
+        this.setState({isLoading: false})
+
      } 
 
     render(){
-
-        const {allFormattedCategories, userFormattedCategories, user_id, category, checkboxForm} = this.state
+        const {isLoading, allFormattedCategories, userFormattedCategories, user_id, category, checkboxForm} = this.state
         const confirmedWindow = this.state.openedWindow ? <ConfirmWindow userid={user_id} 
         category={category} toggleFn={this.windowToggle} removeFn={this.remove}/> : null
         return (<> 
+        {isLoading ? <div className="modal"><div className="loader preload-linear">Loading...</div></div> : null}
+        <div className="header-landing">
+            <Link to="/landing">
+            <div className="title-logo">
+                <img className="logo-home" src={logo} alt="InterestPot" />
+                <div className="title">
+                    InterestPot
+                </div>
+            </div>
+            </Link>    
+            <div className="menu-content" onClick={() => this.toggleMenu()}>
+                <span className="nav-icon">&nbsp;</span>
+                {this.state.isMenuOpen ? this.renderMenu() : null}
+            </div>
+        </div>  
          <main className="page-main">
                 <section className="categories">
                 <h2>Selected Interests</h2> 
                     {confirmedWindow}
                     {userFormattedCategories}
                 </section>
-                <section className="other-categories">
+                <section className="categories">
                 <h2>Other Interests</h2> 
                     {allFormattedCategories}
                     {checkboxForm}
-                </section>     
-            </main>
-           
+                </section>
+        </main>
+           <Footer />
         </>
         )
     }
 }
 const mapStateToProps =  reduxState => reduxState
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps, {logout})(Dashboard)

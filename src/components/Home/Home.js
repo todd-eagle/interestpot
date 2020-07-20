@@ -17,7 +17,6 @@ function Home(props) {
     isLoggedIn ? props.history.push('/landing') : props.history.push('/')
    }, [])
 
-
   const renderMenu = () => {
     return <nav className="menu">
               <span className="nav-icon nav-icon__close" onClick={() => toggleMenu()}>&nbsp;</span>
@@ -32,7 +31,7 @@ function Home(props) {
       <>
             <div className="header-home">
             <div className="title-logo">
-                <img className="logo-home" src={logo} Alt="InterestPot"/>
+                <img className="logo-home" src={logo} alt="Interest Pot"/>
                 <div className="title">
                     InterestPot
                 </div>

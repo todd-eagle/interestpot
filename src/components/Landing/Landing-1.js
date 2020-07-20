@@ -15,6 +15,7 @@ class Landing extends Component {
         this.state = {
             heroArticle: '',
             herosideArticles: '',
+            herosideArticles1: '',
             middleArticles: '',
             section: '',
             isMenuOpen: false
@@ -56,7 +57,7 @@ class Landing extends Component {
                   <span className="nav-icon nav-icon__close" onClick={() => this.toggleMenu()}>&nbsp;</span>
                     <div className="menu-box">
                       <Link onClick={e => this.props.logout()} className="menu-item" to='/login'>Logout</Link>
-                      <Link className="menu-item" to={isLoggedIn ? '/landing' : '/login'}>Profile</Link>
+                      <Link className="menu-item" to={isLoggedIn ? '/profile' : '/login'}>Profile</Link>
                       <Link className="menu-item" to={isLoggedIn ? '/dashboard' : '/login'}>Dashboard</Link>
                     </div>    
               </nav>
@@ -78,10 +79,13 @@ class Landing extends Component {
     renderHeroSide = (data, categories, num) => {
         let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length)); 
         const sideArticles = this.grabDataByCategory(data, categories[randomCategoryIndex], num, true)
+        const sideArticles1 = this.grabDataByCategory(data, categories[randomCategoryIndex], num, true)
         const renderedArticles = this.cardFormat(sideArticles, 'main-card')
+        const renderedArticles1 = this.cardFormat(sideArticles1, 'main-card')
 
         this.setState({
-            herosideArticles: renderedArticles
+            herosideArticles: renderedArticles,
+            herosideArticles1: renderedArticles1
         })
     }
 
@@ -157,17 +161,19 @@ class Landing extends Component {
     }
 
     render(){
-        const {section, heroArticle, herosideArticles, middleArticles} = this.state
+        const {section, heroArticle, herosideArticles, herosideArticles1, middleArticles} = this.state
          console.log(this.state)
         return (
             <>
                 <div className="header-landing">
+                  <Link to="/landing">
                     <div className="title-logo">
                         <img className="logo-home" src={logo} alt="InterestPot" />
                         <div className="title">
                             InterestPot
                         </div>
                     </div>
+                    </Link>    
                     <div className="menu-content" onClick={() => this.toggleMenu()}>
                         <span className="nav-icon">&nbsp;</span>
                         {this.state.isMenuOpen ? this.renderMenu() : null}
@@ -178,6 +184,9 @@ class Landing extends Component {
                         {heroArticle}
                         <div className="side-panel-1">
                             {herosideArticles}
+                        </div>
+                        <div className="side-panel-1">
+                            {herosideArticles1}
                         </div>
                     </div>
                     <div className="section-main">

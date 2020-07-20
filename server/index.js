@@ -44,4 +44,5 @@ app.post('/api/auth/register', authCtrl.register)
 app.post('/api/auth/login', authCtrl.login)
 app.delete('/api/auth/logout', authCtrl.logout)
 app.get('/api/auth/session', authCrtl.getSessionUser)
+app.put('/api/auth/user/:id', authCrtl.update)
 

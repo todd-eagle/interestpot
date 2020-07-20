@@ -16,8 +16,7 @@ module.exports = {
        // console.log("hashed password: ", hash)
       
         const newUser = await db.users.insert({email:email, password:hash}) 
-    
-        
+     
         req.session.user = {
           id: newUser.id,
           email: newUser.email
@@ -28,7 +27,6 @@ module.exports = {
     },
     
     login: async( req, res ) => {
-     
         const db = req.app.get('db');
         const {email, password} = req.body 
         console.log("req.body", req.body)
@@ -60,7 +58,18 @@ module.exports = {
         res.sendStatus(500)
       }
     },
+    update: async( req, res ) => {
+      const db = req.app.get('db');
+      const {email} = req.body
+      const{id} = req.params
 
+      // console.log("Update params = ", email)
+
+      const userUpdate = await db.users.update({id}, {email})
+      // console.log("update email= ", userUpdate)
+
+
+    },
     logout: (req, res) => {
         req.session.destroy();
         res.sendStatus(200);

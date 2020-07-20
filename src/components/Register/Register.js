@@ -16,6 +16,7 @@ class Register extends Component {
         this.state = {
             categories: new Map(),
             articles: [],
+            siteIsLoading: false
         }
     }
 
@@ -35,8 +36,10 @@ class Register extends Component {
     }
     
     dataGenerator = async (e) => {
-       e.preventDefault()
-       const cats = this.state.categories
+        e.preventDefault()
+        const cats = this.state.categories
+
+        this.setState({ siteIsLoading: true})
 
        for (let [key, value] of cats.entries()) {
         let data = []
@@ -47,6 +50,7 @@ class Register extends Component {
         // console.log(data)
          await axios.post('/api/categories/', data)  
       }
+      this.setState({ siteIsLoading: false})
         this.props.history.push('/landing');
     }
 
@@ -68,8 +72,10 @@ class Register extends Component {
     }
 
     render(){
+        const {siteIsLoading} = this.state
         return(
             <>
+            {siteIsLoading ? <div className="modal"><div className="loader preload-linear">Loading...</div></div> : null}
             <div className="register"> 
                 <section class="category-checkboxes">
                     <div className="all-categories">

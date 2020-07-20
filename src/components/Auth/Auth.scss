@@ -1,4 +1,4 @@
-.login-reg-page{
+.login-reg-page, .profile-page{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +9,7 @@
     height: 100vh;
  }
 
- .login-box{
+ .login-box, .profile-box{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +22,8 @@
     padding: 4rem 0;
   }
 
- .login-box input {
+ .login-box input,
+ .profile-box input {
    width: 35rem;
    height: 4rem;
    margin-bottom: 1.5rem;
@@ -35,14 +36,16 @@
   color: rgb(156, 156, 156);
  }
 
- .login-box h2 {
+ .login-box h2,
+ .profile-box h2 {
    flex-basis: unset;
    color: #374572;
    font-weight: 700;
    font-size: 3rem;
  }
 
- .login-box .btn{
+ .login-box .btn,
+ .profile-box .btn{
    margin-top: 2rem;
    padding: 1rem 2rem;
    background-color: #483966;
@@ -50,7 +53,7 @@
 
  .login-box .login-text {
    width: 33rem;
-   font-size: 1.6rem;
+   font-size: 2rem;
    padding: 1.5rem 0 2rem 0;
  }
 

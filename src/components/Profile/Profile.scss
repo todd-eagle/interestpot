@@ -1,0 +1,52 @@
+.header-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#343F66;
+    margin-bottom: unset;
+    height: 8rem;
+   
+  }
+  
+  .header-profile .logo-home {
+    width: 4rem;
+    height: 2.7rem;
+  }
+  
+  .header-profile .title{
+    font-size: 3rem;
+  }
+  
+  .header-profile .title-logo {
+    margin-top: unset;
+    margin-left: 14rem;
+  }
+  
+  .header-profile .menu-content {
+    margin-right: 14rem;
+    margin-top: 2rem;;
+  }
+  
+  .profile-page{
+    height: 89vh;
+    background-image: url("../../img/background4.png");
+  }
+
+  .header-profile .menu-content .nav-icon,
+  .header-profile .menu-content .nav-icon::before,
+  .header-profile .menu-content .nav-icon::after {
+   
+    background-color:white !important;
+  }
+  
+  .header-profile .menu-content .nav-icon__close {
+    background-color:transparent !important;
+    margin: 3rem 2rem;
+  }
+   
+  .profile-box .profile-text {
+    width: 33rem;
+    font-size: 2rem;
+    padding: 0 0 2rem 0;
+  }
+ 
