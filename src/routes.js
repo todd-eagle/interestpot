@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard'
 import Landing from './components/Landing/Landing-1'
 import HomePage from './components/Home/Home'
 import Auth from './components/Auth/Auth'
+import Login from './components/Auth/Login'
 
 export default (
     <Switch>
@@ -14,5 +15,6 @@ export default (
         <Route path="/register" component={Register} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/auth" component={Auth} />
+        <Route path="/login" component={Login} />
     </Switch>
 )

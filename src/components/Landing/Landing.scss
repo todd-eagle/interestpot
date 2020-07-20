@@ -26,6 +26,7 @@
   margin-top: 2rem;;
 }
 
+
 .header-landing .menu-content .nav-icon,
 .header-landing .menu-content .nav-icon::before,
 .header-landing .menu-content .nav-icon::after {
@@ -98,9 +99,11 @@ h3{
  }
  
 .section-main {
-   margin-top: 2rem;
+  margin-top: 2rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  max-width: 121rem;
 }
 
 .prominent-card{

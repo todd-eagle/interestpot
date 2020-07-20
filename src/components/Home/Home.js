@@ -22,7 +22,7 @@ function Home(props) {
     return <nav className="menu">
               <span className="nav-icon nav-icon__close" onClick={() => toggleMenu()}>&nbsp;</span>
                 <div className="menu-box">
-                  <Link className="menu-item" to={isLoggedIn ? '/landing' : '/auth'}>Login</Link>
+                  <Link className="menu-item" to={isLoggedIn ? '/landing' : '/login'}>Login</Link>
                   <Link className="menu-item" to={isLoggedIn ? '/landing' : '/auth'}>Register</Link>
                   <Link className="menu-item" to={isLoggedIn ? '/dashboard' : '/auth'}>Account</Link>
                 </div>    

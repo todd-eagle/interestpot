@@ -6,16 +6,16 @@ import axios from 'axios';
 import logo from '../../img/logo.png'
 import './Auth.scss'
 
-const Auth = (props) => {
+const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const handleSubmit = async e => {
         try {
-        const register = await axios.post('/api/auth/register', {email, password})
-        console.log("register: ", register)
-        props.login(register.data)
-        props.history.push('/register');
+        const loggedIn = await axios.post('/api/auth/login', {email, password})
+        console.log("loggedIn: ", loggedIn)
+        props.login(loggedIn.data)
+        props.history.push('/Landing');
         }catch{(console.error())}     
     }
 
@@ -34,13 +34,13 @@ const Auth = (props) => {
         </header>
         <div className="login-reg-page">
             <div className="login-box">
-            <h2>On Your Marks...</h2>
-                <p className="login-text">The most exciting part about starting a new journey is the anticpation.  Don't you think?</p>
+            <h2>Welcome Back!.</h2>
+                <p className="login-text">We missed you.</p>
                 <input type="text" className="authInput" id="email" 
                 name="email" placeholder="Email" required onChange={e => setEmail(e.target.value)} />
                 <input type="password" className="authInput"
                 id="password" name="password" placeholder="Password" required onChange={e => setPassword(e.target.value)} />
-                <button className="btn login"  onClick={handleSubmit}>Let's Go!</button>
+                <button className="btn login"  onClick={handleSubmit}>What did I miss?</button>
 
             </div>
         </div>
@@ -49,4 +49,4 @@ const Auth = (props) => {
 }
 
 const mapStateToProps =  reduxState => reduxState
-export default connect(mapStateToProps, {login})(Auth)
+export default connect(mapStateToProps, {login})(Login)

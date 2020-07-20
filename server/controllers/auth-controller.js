@@ -31,18 +31,20 @@ module.exports = {
      
         const db = req.app.get('db');
         const {email, password} = req.body 
-  
-        const [userFound] = await db.check_for_user(email)
+        console.log("req.body", req.body)
+        const userFound = await db.users.find({email})
         
         if(!userFound){
           return res.status(404).send('User not found! Please Register.')
         }
+
+        // console.log("UserFound Id: ", userFound[0].id)
   
-        const authenticate = bcryptjs.compareSync(password, userFound.password)
+        const authenticate = bcryptjs.compareSync(password, userFound[0].password)
         if(authenticate){
           req.session.user = {
-            id: userFound.id,
-            email: userFound.email,
+            id: userFound[0].id,
+            email: userFound[0].email,
           }
           req.session.save()
           return res.status(200).send(req.session.user)
@@ -51,6 +53,7 @@ module.exports = {
     },
 
     getSessionUser: (req, res) => {
+      console.log("req.session.user ", req.session.user)
       if(req.session.user){
         res.status(200).send(req.session.user)
       }else{

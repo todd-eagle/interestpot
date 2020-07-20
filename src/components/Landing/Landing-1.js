@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {logout} from '../../redux/reducers/AuthReducer';
 import {login} from '../../redux/reducers/AuthReducer';
 import logo from './../../img/logo.png'
+import Footer from '../Footer/Footer'
 
 import './Landing.scss'
 
@@ -20,6 +22,8 @@ class Landing extends Component {
     }
 
     async componentDidMount (){
+        console.log("props",this.props)
+        if(!(this.props.isLoggedIn)){ this.props.history.push('/login')}
         const user = await axios.get('/api/auth/session')
         this.props.login(user.data)
         this.getData()
@@ -51,9 +55,9 @@ class Landing extends Component {
         return <nav className="menu">
                   <span className="nav-icon nav-icon__close" onClick={() => this.toggleMenu()}>&nbsp;</span>
                     <div className="menu-box">
-                      <Link className="menu-item" to={isLoggedIn ? '/landing' : '/auth'}>Logout</Link>
-                      <Link className="menu-item" to={isLoggedIn ? '/landing' : '/auth'}>Profile</Link>
-                      <Link className="menu-item" to={isLoggedIn ? '/dashboard' : '/auth'}>Dashboard</Link>
+                      <Link onClick={e => this.props.logout()} className="menu-item" to='/login'>Logout</Link>
+                      <Link className="menu-item" to={isLoggedIn ? '/landing' : '/login'}>Profile</Link>
+                      <Link className="menu-item" to={isLoggedIn ? '/dashboard' : '/login'}>Dashboard</Link>
                     </div>    
               </nav>
     }
@@ -84,10 +88,14 @@ class Landing extends Component {
     renderMiddleArticles = (data, categories, num) => {
         let randomCategoryIndex =  Math.floor(Math.random() * Math.floor(categories.length)); 
         const articles = this.grabDataByCategory(data, categories[randomCategoryIndex], num, true)
-        const renderedArticles = this.cardFormat(articles, 'prominent-card')
-
+        // const renderedArticles = this.cardFormat(articles, 'prominent-card')
+        const FirstRenderedArticles = this.cardFormat(articles, 'prominent-card')
+        const FinalRenderArticles = <>
+                                        <h2>POPULAR</h2>
+                                        {FirstRenderedArticles}
+                                    </>
         this.setState({
-            middleArticles: renderedArticles
+            middleArticles: FinalRenderArticles
         })
     }
 
@@ -153,15 +161,15 @@ class Landing extends Component {
          console.log(this.state)
         return (
             <>
-                <div class="header-landing">
-                    <div class="title-logo">
-                        <img class="logo-home" src={logo} />
-                        <div class="title">
+                <div className="header-landing">
+                    <div className="title-logo">
+                        <img className="logo-home" src={logo} alt="InterestPot" />
+                        <div className="title">
                             InterestPot
                         </div>
                     </div>
                     <div className="menu-content" onClick={() => this.toggleMenu()}>
-                        <span class="nav-icon">&nbsp;</span>
+                        <span className="nav-icon">&nbsp;</span>
                         {this.state.isMenuOpen ? this.renderMenu() : null}
                     </div>
                 </div>  
@@ -177,6 +185,7 @@ class Landing extends Component {
                     </div>               
                     {section}
                 </main>
+                <Footer />
             </>
         )
     }
@@ -184,4 +193,6 @@ class Landing extends Component {
 
 
 const mapStateToProps =  reduxState => reduxState
-export default connect(mapStateToProps, {login})(Landing)
+
+const mapDispatchToProps = {login, logout}
+export default connect(mapStateToProps, mapDispatchToProps)(Landing)
