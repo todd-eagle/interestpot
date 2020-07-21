@@ -7,10 +7,17 @@ const dataCtrl = require('./controllers/data-controller')
 const cors = require('cors')
 const authCtrl = require('./controllers/auth-controller')
 const scraperCtrl = require('./scrapers/scraper-controller')
+const path = require('path')
+// for production server
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
 const app = express();
+
+// production server
+app.use(express.static(__dirname + '/../build'))
+
+
 app.use(cors())
 app.use(express.json());
 app.use(
@@ -32,6 +39,11 @@ massive({
     console.log('Connected to db')
     app.listen( SERVER_PORT, () => console.log(`Connected to port ${SERVER_PORT}`))
 }).catch(err=>console.log(err))
+
+//production server
+app.get('*', (req, res) =>{
+    res.sendFile(path.join(__dirname,'../build/index.html'))
+})
 
 app.get('/api/category_tables/:table_name', dataCtrl.getCategories)
 app.post('/api/categories/', dataCtrl.postCategoriesByUser)
