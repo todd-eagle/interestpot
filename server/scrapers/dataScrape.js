@@ -6,7 +6,9 @@ const  scrape = async (catData) => {
   const linkData = catData.map( async  (e, index) => {
     let p = {}
     const html = await axios.get(e.url)
-    const $ = await cheerio.load(html.data)
+    const $ = await cheerio.load(html.data, {
+      xmlMode: true
+    })
     $(''+ e.root +'').each((i, elem) => {
       if (i <= n) {
         const dataStuff ={

@@ -6,6 +6,7 @@ const authCrtl = require('./controllers/auth-controller')
 const dataCtrl = require('./controllers/data-controller')
 const cors = require('cors')
 const authCtrl = require('./controllers/auth-controller')
+const scraperCtrl = require('./scrapers/scraper-controller')
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
@@ -45,4 +46,6 @@ app.post('/api/auth/login', authCtrl.login)
 app.delete('/api/auth/logout', authCtrl.logout)
 app.get('/api/auth/session', authCrtl.getSessionUser)
 app.put('/api/auth/user/:id', authCrtl.update)
+
+app.get('/api/scraper', scraperCtrl.travelScraper)
 
